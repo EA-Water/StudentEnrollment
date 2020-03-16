@@ -35,7 +35,6 @@ public class StudentattendanceApplication {
 		user.setPassword(bcryptEncoder.encode(user.getPassword()));
 		userRepo.save(user);
 
-
 	}
 
 

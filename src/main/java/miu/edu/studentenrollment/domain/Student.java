@@ -2,7 +2,10 @@ package miu.edu.studentenrollment.domain;
 
 
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.Email;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Student {
@@ -10,15 +13,32 @@ public class Student {
     @Id
     @GeneratedValue
     private Long id;
-    private String firstName;
-    private String lastName;
+    @Column(unique = true)
+    private String studentId;
+    private String studentName;
 
-    private String gender;
-    private Date dob;
+    @Email
+    private String studentEmail;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="studentprogram_id")
-    private StudentProgram studentProgram;
+    @OneToMany(mappedBy = "student")
+    private List<Enrollment> enrollment;
+
+    @Valid
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="mailing_address_id")
+    private Address mailingAddress;
+
+    @Valid
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="home_address_id")
+    private Address homeAddress;
+
+
+    @Valid
+    @ManyToOne
+    @JoinColumn(name ="entry_id")
+    private Entry entry;
+
 
 
     public Student() {
@@ -32,43 +52,61 @@ public class Student {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getStudentId() {
+        return studentId;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getStudentName() {
+        return studentName;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
     }
 
-    public String getGender() {
-        return gender;
+    public String getStudentEmail() {
+        return studentEmail;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
+    public void setStudentEmail(String studentEmail) {
+        this.studentEmail = studentEmail;
     }
 
-    public Date getDob() {
-        return dob;
+    public List<Enrollment> getEnrollment() {
+        return enrollment;
     }
 
-    public void setDob(Date dob) {
-        this.dob = dob;
+    public void setEnrollment(List<Enrollment> enrollment) {
+        this.enrollment = enrollment;
     }
 
-    public StudentProgram getStudentProgram() {
-        return studentProgram;
+    public Address getMailingAddress() {
+        return mailingAddress;
     }
 
-    public void setStudentProgram(StudentProgram studentProgram) {
-        this.studentProgram = studentProgram;
+    public void setMailingAddress(Address mailingAddress) {
+        this.mailingAddress = mailingAddress;
     }
+
+    public Address getHomeAddress() {
+        return homeAddress;
+    }
+
+    public void setHomeAddress(Address homeAddress) {
+        this.homeAddress = homeAddress;
+    }
+
+    public Entry getEntry() {
+        return entry;
+    }
+
+    public void setEntry(Entry entry) {
+        this.entry = entry;
+    }
+
+
 }
