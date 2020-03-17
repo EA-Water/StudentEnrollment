@@ -4,6 +4,7 @@ import java.util.List;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,13 +17,16 @@ import miu.edu.studentenrollment.domain.Course;
 import miu.edu.studentenrollment.service.CourseService;
 
 @RestController
+@CrossOrigin
 public class CourseController {
 	@Autowired
 	CourseService courseService;
 
 	@PostMapping("/create/course")
-	public Course createCourse(@RequestBody Course course) {
-		return courseService.saveCourse(course);
+	public List<Course> createCourse(@RequestBody Course course) {
+		courseService.saveCourse(course);
+		List<Course> courses = courseService.courses();
+		return courses;
 	}
 
 	@GetMapping("/view/courses")
@@ -38,7 +42,7 @@ public class CourseController {
 			findCourse.setId(id);
 			courseService.updateCourse(findCourse);
 		} catch (Exception e) {
-
+			e.printStackTrace();
 		}
 		return findCourse;
 	
