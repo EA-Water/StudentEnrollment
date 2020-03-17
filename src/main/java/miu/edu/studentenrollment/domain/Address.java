@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -17,7 +18,7 @@ public class Address {
     private String street;
     @NotEmpty
     private String city;
-    @NotEmpty
+    @NotNull
     @Digits(integer = 5,fraction = 0)
     private Integer postalCode;
     @NotEmpty

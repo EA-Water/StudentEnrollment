@@ -1,6 +1,7 @@
 package miu.edu.studentenrollment.controller;
 
 import miu.edu.studentenrollment.domain.Student;
+import miu.edu.studentenrollment.service.EntryService;
 import miu.edu.studentenrollment.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -10,9 +11,13 @@ import java.util.List;
 public class StudentController {
     @Autowired
     private StudentService studentService;
+    @Autowired
+    private EntryService entryService;
 
-    @PostMapping("/create/student")
-    public Student addStudent(@RequestBody Student student){
+    @PostMapping("/create/student/{entryID}")
+    public Student addStudent(@RequestBody Student student, @PathVariable long entryID) throws Exception {
+        student.setEntry(entryService.findEntry(entryID));
+//        System.out.println(student.getEntry());
         return studentService.addStudent(student);
     }
 
