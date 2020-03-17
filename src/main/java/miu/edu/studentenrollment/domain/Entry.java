@@ -1,11 +1,8 @@
 package miu.edu.studentenrollment.domain;
 
-import jdk.nashorn.internal.ir.annotations.Immutable;
-
 import javax.persistence.*;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.FutureOrPresent;
-import javax.validation.constraints.Pattern;
 import java.util.Date;
 import java.util.List;
 

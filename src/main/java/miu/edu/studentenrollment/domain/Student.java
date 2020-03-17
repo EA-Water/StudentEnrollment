@@ -4,7 +4,6 @@ package miu.edu.studentenrollment.domain;
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -107,6 +106,4 @@ public class Student {
     public void setEntry(Entry entry) {
         this.entry = entry;
     }
-
-
 }
