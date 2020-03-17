@@ -14,7 +14,7 @@ public interface OfferingRepository extends JpaRepository<Offering, Long>{
 	List<Offering> findByOfferingCode(String offeringCode);
 	Offering getById(long id);
    
-    @Query("SELECT o FROM Offering o WHERE (o.id LIKE %:searchvalue% or o.offeringCode LIKE %:searchvalue%)")
+    @Query("SELECT o FROM Offering o WHERE (o.offeringCode LIKE %:searchvalue%)")
     List<Offering> findOfferings(@Param("searchvalue") String searchvalue);
 
 }

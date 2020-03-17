@@ -4,11 +4,15 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import miu.edu.studentenrollment.domain.Offering;
 import miu.edu.studentenrollment.repository.OfferingRepository;
+import miu.edu.studentenrollment.service.OfferingService;
 
 @Service
+@Transactional(propagation = Propagation.REQUIRED)
 public class OfferingServiceImpl implements OfferingService{
 
 	@Autowired
@@ -42,7 +46,7 @@ public class OfferingServiceImpl implements OfferingService{
 	public boolean isOfferingExit(Offering offering) {
 		// TODO Auto-generated method stub
 		List<Offering> offerings = offeringRepository.findByOfferingCode(offering.getOfferingCode());
-		return offerings.isEmpty();
+		return !offerings.isEmpty();
 	}
 
 	@Override

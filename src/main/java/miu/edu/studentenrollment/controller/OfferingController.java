@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import miu.edu.studentenrollment.domain.Offering;
-import miu.edu.studentenrollment.service.impl.OfferingService;
+import miu.edu.studentenrollment.service.OfferingService;
 import miu.edu.studentenrollment.util.CustomError;
 
 @RestController
@@ -58,6 +58,7 @@ public class OfferingController {
     public ResponseEntity<?> createOffering(@RequestBody Offering offering, UriComponentsBuilder ucBuilder) {
  
         if (offeringService.isOfferingExit(offering)) {
+        	System.out.println(offeringService.isOfferingExit(offering));
             return new ResponseEntity(new CustomError("Unable to create. An Offerng with Offering Code " + 
             offering.getOfferingCode() + " already exist."),HttpStatus.CONFLICT);
         }

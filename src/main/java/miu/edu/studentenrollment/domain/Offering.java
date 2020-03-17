@@ -14,12 +14,12 @@ public class Offering {
 
     @Column(unique = true)
     private String offeringCode;
-
-
+    
     @Valid
     @ManyToOne
     @JoinColumn(name="block_id")
     private Block block;
+    
     @Valid
     @ManyToOne
     @JoinColumn(name="course_id")
@@ -57,5 +57,11 @@ public class Offering {
         this.course = course;
     }
 
+	@Override
+	public String toString() {
+		return "Offering [id=" + id + ", offeringCode=" + offeringCode + ", block=" + block + ", course=" + course
+				+ "]";
+	}
 
+    
 }
