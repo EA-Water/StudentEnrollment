@@ -27,6 +27,18 @@ public class Block {
     @Future
     private Date endDate;
 
+    public Block() {
+    }
+
+    public Block(String blockCode,String blockName,String blockSemester,String blockSequenceNumber,Date startDate, Date endDate) {
+        this.blockCode = blockCode;
+        this.blockName = blockName;
+        this.blockSemester = blockSemester;
+        this.blockSequenceNumber = blockSequenceNumber;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
+
     public Long getId() {
         return id;
     }
