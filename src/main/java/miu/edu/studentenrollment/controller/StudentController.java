@@ -1,7 +1,7 @@
 package miu.edu.studentenrollment.controller;
 
 import miu.edu.studentenrollment.domain.Student;
-import miu.edu.studentenrollment.service.impl.StudentService;
+import miu.edu.studentenrollment.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -17,8 +17,9 @@ public class StudentController {
     }
 
     @DeleteMapping("/remove/student/{studentID}")
-    public void removeStudentByID(@PathVariable Long studentID){
+    public String removeStudentByID(@PathVariable Long studentID){
         studentService.removeStudentByID(studentID);
+        return "Delete Successful";
     }
 
     @PutMapping("/update/student/{studentID}")

@@ -2,16 +2,15 @@ package miu.edu.studentenrollment.service.impl;
 
 import miu.edu.studentenrollment.domain.Student;
 import miu.edu.studentenrollment.repository.StudentRepo;
+import miu.edu.studentenrollment.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
-public class StudentService {
+public class StudentServiceImpl implements StudentService {
     @Autowired
     private StudentRepo studentRepo;
 
@@ -21,10 +20,6 @@ public class StudentService {
 
     public void removeStudentByID(Long studentID) {
         studentRepo.deleteById(studentID);
-    }
-
-    public Student updateStudentByID(Student student) {
-        return studentRepo.save(student);
     }
 
     public Student viewStudent(Long studentID) {
