@@ -10,19 +10,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-//import org.springframework.web.bind.annotation.RequestMapping;
-//import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import miu.edu.studentenrollment.domain.Faculty;
-import miu.edu.studentenrollment.service.FaculityService;
+import miu.edu.studentenrollment.service.FacultyService;
 
 @RestController
 @CrossOrigin
 public class FacultyController {
 
 	@Autowired
-	private FaculityService facultyService;
+	private FacultyService facultyService;
 
 	@PostMapping("/create/faculty")
 	public void createFaculity(@RequestBody Faculty faculity) {
@@ -39,12 +37,12 @@ public class FacultyController {
 	@PutMapping("/update/faculty/{id}")
 	public void updateFaculity(@PathVariable Long id, @RequestBody Faculty faculty) {
 
-		Faculty findFaculty = facultyService.getOneFaculty(id);
+		//Faculty findFaculty = facultyService.getOneFaculty(id);
 		try {
 			faculty.setId(id);
 			facultyService.updateFaculity(faculty);
 		} catch (Exception e) {
-			// TODO: handle exception
+
 		}
 	}
 
