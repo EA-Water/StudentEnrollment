@@ -24,9 +24,15 @@ public class FaculityServiceImpl implements FaculityService {
 	}
 
 	@Override
-	public void removeFaculity(Faculty faculity) {
+	public String removeFaculity(Faculty faculity) {
 		// TODO Auto-generated method stub
-		faculityRepo.delete(faculity);
+		try {
+			faculityRepo.delete(faculity);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+		return "Remove Sucessfull!!";
 	}
 
 	@Override

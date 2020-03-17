@@ -49,7 +49,17 @@ public class FacultyServiceImplTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
 
+	@Test
+	void testRemoveFaculity() {
+		try {
+			when(facultyService.removeFaculity(faculty1)).thenReturn("Remove Sucessfull!!");
+			assertEquals("Remove Sucessfull!!", facultyService.removeFaculity(faculty1));
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Test

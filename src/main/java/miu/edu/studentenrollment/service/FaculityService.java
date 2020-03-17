@@ -8,7 +8,7 @@ public interface FaculityService {
 
 	public Faculty addFaculity(Faculty faculity);
 
-	public void removeFaculity(Faculty faculity);
+	public String removeFaculity(Faculty faculity);
 
 	public Faculty updateFaculity(Faculty faculity) throws Exception;
 
