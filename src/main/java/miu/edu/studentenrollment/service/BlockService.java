@@ -10,7 +10,7 @@ public interface BlockService {
 
     public Block findById(Long theId);
 
-    public void save(Block block);
+    public Block save(Block block);
 
     public Block updateBlock(Block block) throws Exception;
 }
