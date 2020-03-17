@@ -1,4 +1,4 @@
-package miu.edu.studentenrollment.service.impl;
+package miu.edu.studentenrollment.service;
 
 import miu.edu.studentenrollment.domain.Block;
 
@@ -12,5 +12,5 @@ public interface BlockService {
 
     public void save(Block block);
 
-    public void deleteById(Long theId);
+    public Block updateBlock(Block block) throws Exception;
 }
