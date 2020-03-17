@@ -37,9 +37,13 @@ public class BlockServiceImpl implements BlockService {
 
 	@Override
 	@Transactional
-	public Block save(Block block) {
-		repo.save(block);
-		return block;
+	public String save(Block block) {
+		try {
+			repo.save(block);
+		}catch(Exception e){
+
+		}
+		return "Block insertion successful!";
 	}
 
 	@Override
