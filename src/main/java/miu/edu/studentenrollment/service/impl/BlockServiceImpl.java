@@ -37,8 +37,9 @@ public class BlockServiceImpl implements BlockService {
 
 	@Override
 	@Transactional
-	public void save(Block block) {
+	public Block save(Block block) {
 		repo.save(block);
+		return block;
 	}
 
 	@Override
