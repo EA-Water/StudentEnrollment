@@ -26,7 +26,7 @@ public class Entry {
     private Date enrollmnetEndDate;
 
     @OneToMany(mappedBy = "entry")
-    @Immutable
+//    @Immutable
     private List<Student> studentList;
 
     public Long getId() {
