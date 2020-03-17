@@ -42,4 +42,9 @@ public class EntryController {
 
         return entries;
     }
+
+    @GetMapping("/hello")
+    public String hello(){
+        return "Hello there";
+    }
 }
