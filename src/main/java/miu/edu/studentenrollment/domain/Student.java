@@ -14,7 +14,8 @@ public class Student {
     private Long id;
     @Column(unique = true)
     private String studentId;
-    private String studentName;
+    private String firstName;
+    private String lastName;
 
     @Email
     private String studentEmail;
@@ -59,12 +60,20 @@ public class Student {
         this.studentId = studentId;
     }
 
-    public String getStudentName() {
-        return studentName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setStudentName(String studentName) {
-        this.studentName = studentName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getStudentEmail() {

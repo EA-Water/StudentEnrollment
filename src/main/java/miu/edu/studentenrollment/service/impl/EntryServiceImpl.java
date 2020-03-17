@@ -20,11 +20,11 @@ public class EntryServiceImpl implements EntryService {
     public Entry createEntry(Entry entry) throws Exception {
         try {
 
-            if(entry.getEnrollmnetEndDate().before(entry.getEntryStartDate())){
+            if(entry.getEnrollmentEndDate().before(entry.getEntryStartDate())){
                 throw new Exception("Invalid enrollment start date");
             }
 
-            if(entry.getEnrollmnetEndDate().before(entry.getEntryStartDate())){
+            if(entry.getEnrollmentEndDate().before(entry.getEntryStartDate())){
                 throw new Exception("Invalid enrollment end date");
             }
 
@@ -61,4 +61,12 @@ public class EntryServiceImpl implements EntryService {
     public List<Entry> viewEntries() {
         return (List<Entry>) entryRepo.findAll();
     }
+
+    @Override
+    public Boolean exist(String name) {
+        return !entryRepo.findByEntryName(name).isEmpty();
+    }
+
+
+
 }

@@ -42,8 +42,8 @@ public class StudentServiceImplTest {
         entry.setId(1L);
         entry.setEntryName("August-2020");
         entry.setEntryStartDate(new Date());
-        entry.setEnrollmnetStartDate(new Date());
-        entry.setEnrollmnetEndDate(new Date());
+        entry.setEnrollmentStartDate(new Date());
+        entry.setEnrollmentEndDate(new Date());
 
         student.setEntry(entry);
         student.setId(3L);
