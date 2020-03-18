@@ -18,7 +18,7 @@ public class FacultyServiceImpl implements FacultyService {
 	private FacultyRepo faculityRepo;
 
 	@Override
-	public Faculty addFaculity(Faculty faculty) {
+	public Faculty createFaculity(Faculty faculty) {
 
 		return faculityRepo.save(faculty);
 	}
@@ -52,7 +52,7 @@ public class FacultyServiceImpl implements FacultyService {
 	}
 
 	@Override
-	public Faculty getOneFaculty(Long id) {
+	public Faculty getFacultyById(Long id) {
 
 		return faculityRepo.getOne(id);
 	}

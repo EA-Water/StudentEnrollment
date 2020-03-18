@@ -18,10 +18,10 @@ public class FacultyServiceImplTest {
 
 	@Mock
 	FacultyServiceImpl facultyService;
-
+ 
 	Faculty faculty1 = new Faculty();
 	Faculty faculty2 = new Faculty();
-	List<Faculty> facultyList = new ArrayList<>(); 
+	List<Faculty> facultyList = new ArrayList<>();
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -36,8 +36,8 @@ public class FacultyServiceImplTest {
 	@Test
 	void testAddFaculity() {
 		try {
-			when(facultyService.addFaculity(faculty1)).thenReturn(faculty1);
-			assertEquals(faculty1, facultyService.addFaculity(faculty1));
+			when(facultyService.createFaculity(faculty1)).thenReturn(faculty1);
+			assertEquals(faculty1, facultyService.createFaculity(faculty1));
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -76,10 +76,10 @@ public class FacultyServiceImplTest {
 	}
 
 	@Test
-	void testGetOneFaculty() {
+	void testGetFacultyById() {
 		try {
-			when(facultyService.getOneFaculty(1L)).thenReturn(faculty1);
-			assertEquals(faculty1, facultyService.getOneFaculty(1L));
+			when(facultyService.getFacultyById(1L)).thenReturn(faculty1);
+			assertEquals(faculty1, facultyService.getFacultyById(1L));
 		} catch (Exception e) {
 
 		}

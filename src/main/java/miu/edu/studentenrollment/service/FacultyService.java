@@ -6,7 +6,7 @@ import miu.edu.studentenrollment.domain.Faculty;
 
 public interface FacultyService {
 
-	public Faculty addFaculity(Faculty faculity);
+	public Faculty createFaculity(Faculty faculity);
 
 	public String removeFaculity(Faculty faculity);
 
@@ -14,5 +14,5 @@ public interface FacultyService {
 
 	public List<Faculty> getAllFaculity();
 
-	public Faculty getOneFaculty(Long id);
+	public Faculty getFacultyById(Long id);
 }
