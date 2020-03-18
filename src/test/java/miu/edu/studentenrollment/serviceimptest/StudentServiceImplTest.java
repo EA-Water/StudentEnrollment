@@ -48,7 +48,8 @@ public class StudentServiceImplTest {
         student.setEntry(entry);
         student.setId(3L);
         student.setStudentId("Reza");
-        student.setStudentName("Rezaur Rahman");
+        student.setFirstName("Rezaur");
+        student.setLastName("Rahman");
         student.setStudentEmail("reza5630@gmail.com");
         student.setHomeAddress(address);
         student.setMailingAddress(address);

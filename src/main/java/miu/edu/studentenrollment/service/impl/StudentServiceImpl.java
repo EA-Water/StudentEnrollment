@@ -1,7 +1,9 @@
 package miu.edu.studentenrollment.service.impl;
 
+import miu.edu.studentenrollment.domain.Entry;
 import miu.edu.studentenrollment.domain.Student;
 import miu.edu.studentenrollment.repository.StudentRepo;
+import miu.edu.studentenrollment.service.EntryService;
 import miu.edu.studentenrollment.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +16,14 @@ public class StudentServiceImpl implements StudentService {
     @Autowired
     private StudentRepo studentRepo;
 
+    @Autowired
+    private EntryService entryService;
+
     public Student addStudent(Student student) {
+//        try {
+//            Entry entry = entryService.findEntry(student.getIdSaving());
+//            student.setEntry(entry);
+//        }catch (Exception e){}
         return studentRepo.save(student);
     }
 

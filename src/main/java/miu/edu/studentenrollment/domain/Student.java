@@ -17,6 +17,8 @@ public class Student {
     private String firstName;
     private String lastName;
 
+    @Transient
+    private Long idSaving;
     @Email
     private String studentEmail;
 
@@ -114,5 +116,13 @@ public class Student {
 
     public void setEntry(Entry entry) {
         this.entry = entry;
+    }
+
+    public Long getIdSaving() {
+        return idSaving;
+    }
+
+    public void setIdSaving(Long idSaving) {
+        this.idSaving = idSaving;
     }
 }
