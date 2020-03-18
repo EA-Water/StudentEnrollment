@@ -3,6 +3,7 @@ package miu.edu.studentenrollment.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,12 +18,14 @@ public class FacultyServiceImpl implements FacultyService {
 	@Autowired
 	private FacultyRepo faculityRepo;
 
+	@PreAuthorize("hasRole('ADMIN')")
 	@Override
 	public Faculty createFaculity(Faculty faculty) {
 
 		return faculityRepo.save(faculty);
 	}
 
+	@PreAuthorize("hasRole('ADMIN')")
 	@Override
 	public String removeFaculity(Faculty faculity) {
 
@@ -35,6 +38,7 @@ public class FacultyServiceImpl implements FacultyService {
 		return "Remove Sucessfull!!";
 	}
 
+	@PreAuthorize("hasRole('ADMIN')")
 	@Override
 	public Faculty updateFaculity(Faculty faculity) throws Exception {
 
@@ -42,12 +46,14 @@ public class FacultyServiceImpl implements FacultyService {
 
 	}
 
+	@PreAuthorize("hasRole('ADMIN') or hasRole('FACULTY')")
 	@Override
 	public List<Faculty> getAllFaculity() {
 
 		return faculityRepo.findAll();
 	}
 
+	@PreAuthorize("hasRole('ADMIN') or hasRole('FACULTY')")
 	@Override
 	public Faculty getFacultyById(Long id) {
 
