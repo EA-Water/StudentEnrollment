@@ -33,14 +33,13 @@ public class SectionServiceImpl implements SectionService {
 
 
     @Override
-    public Section updateSection(Section section) throws Exception {
+    public Section updateSection(Section section,Long id) throws Exception {
 
-        Section foundSection = sectionRepo.getOne(section.getId());
+        Section updatingSection = sectionRepo.getOne(id);
+        updatingSection.setFaculty(section.getFaculty());
+        updatingSection.setOffering(section.getOffering());
 
-        if(foundSection== null){
-            throw new Exception("Invalid section id");
-        }
-        return sectionRepo.save(foundSection);
+        return sectionRepo.save(updatingSection);
     }
 
     @Override

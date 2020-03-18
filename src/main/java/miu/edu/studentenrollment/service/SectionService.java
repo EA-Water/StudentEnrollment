@@ -10,7 +10,7 @@ public interface SectionService {
 
     public List<Section> getAllSections();
 
-    public Section updateSection(Section section) throws Exception;
+    public Section updateSection(Section section, Long id) throws Exception;
 
     public Section getSectionById(Long id) throws Exception;
 }

@@ -58,8 +58,8 @@ public class SectionServiceImplTest {
 	}
 	@Test
 	void testEditSection() throws Exception{
-		when(sectionService.updateSection(section1)).thenReturn(section1);
-		assertEquals(section1, sectionService.updateSection(section1));
+		when(sectionService.updateSection(section1,section1.getId())).thenReturn(section1);
+		assertEquals(section1, sectionService.updateSection(section1, section1.getId()));
 	}
 	@Test
 	void testFindOneSection() throws Exception{
