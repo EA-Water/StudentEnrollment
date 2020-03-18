@@ -110,5 +110,15 @@ class EntryServiceImplTest {
 //                .andExpect(status().isOk())
 //                .andExpect(content().string("Hello there"));
     }
+    
+    @Test
+    void testFindEntry() {
+        try {
+            when(entryService.findEntry(1L)).thenReturn(entry1);
+            assertEquals(entry1, entryService.findEntry(1L));
+        } catch (Exception e) {
+
+        }
+    }
 
 }
