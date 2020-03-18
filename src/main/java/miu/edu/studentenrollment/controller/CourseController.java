@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import miu.edu.studentenrollment.domain.Course;
@@ -18,25 +19,26 @@ import miu.edu.studentenrollment.service.CourseService;
 
 @RestController
 @CrossOrigin
+@RequestMapping("/courses")
 public class CourseController {
 	@Autowired
 	CourseService courseService;
 
-	@PostMapping("/create/course")
+	@PostMapping("/")
 	public List<Course> createCourse(@RequestBody Course course) {
-		courseService.saveCourse(course);
+		courseService.createCourse(course);
 		List<Course> courses = courseService.courses();
 		return courses;
 	}
 
-	@GetMapping("/view/courses")
+	@GetMapping("/")
 	public List<Course> getAllCourses() {
 		return courseService.courses();
 	}
 
-	@PutMapping("/update/course/{id}")
+	@PutMapping("/{id}")
 	public Course updateCourse(@PathVariable Long id, @RequestBody Course course) {
-		Course findCourse = courseService.getOneCourse(id);
+		Course findCourse = courseService.getCourseById(id);
 		try {
 			findCourse = course;
 			findCourse.setId(id);
@@ -48,9 +50,9 @@ public class CourseController {
 	
 	}
 
-	@DeleteMapping("/remove/course/{id}")
+	@DeleteMapping("/{id}")
 	public String removeCourse(@PathVariable Long id) {
-		Course findCourse = courseService.getOneCourse(id);
-		return courseService.deleteCourse(findCourse);
+		Course findCourse = courseService.getCourseById(id);
+		return courseService.removeCourse(findCourse);
 	}
 }
