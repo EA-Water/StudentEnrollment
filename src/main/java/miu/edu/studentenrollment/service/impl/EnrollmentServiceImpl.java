@@ -37,4 +37,22 @@ public class EnrollmentServiceImpl implements EnrollmentService {
     public List<Enrollment> getEnrollmentBySection(Section section) {
         return enrollmentRepo.findBySection(section);
     }
+
+	@Override
+	public boolean isEnrollmentExit(Enrollment enrollment) {
+		// TODO Auto-generated method stub
+		return enrollmentRepo.existsByStudentAndSection(enrollment.getSection().getId(), enrollment.getStudent().getId());
+	}
+
+	@Override
+	public Enrollment getEnrollmentById(long id) {
+		// TODO Auto-generated method stub
+		return enrollmentRepo.getOne(id);
+	}
+
+	@Override
+	public void deleteEnrollment(long id) {
+		// TODO Auto-generated method stub
+		enrollmentRepo.deleteById(id);
+	}
 }

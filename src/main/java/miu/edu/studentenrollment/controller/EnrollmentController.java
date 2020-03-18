@@ -1,8 +1,13 @@
 package miu.edu.studentenrollment.controller;
 
 import miu.edu.studentenrollment.domain.Enrollment;
+import miu.edu.studentenrollment.domain.Offering;
 import miu.edu.studentenrollment.service.EnrollmentService;
+import miu.edu.studentenrollment.util.CustomError;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -40,6 +45,34 @@ public class EnrollmentController {
     public List<Enrollment> viewSectionEnrollment(@PathVariable Long sectionId){
         return null;
     }
-
+    
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+	@PutMapping("/update/enrollment/{id}")
+    public ResponseEntity<?> updateEnrollment(@PathVariable("id") long id, @RequestBody Enrollment enrollment) {
+    	Enrollment currentEnrollment = enrollmentService.getEnrollmentById(id);
+        if (currentEnrollment == null) {
+            return new ResponseEntity(new CustomError("Unable to upate. Enrollment with id " + id + " not found."),
+                    HttpStatus.NOT_FOUND);
+        }
+ 
+        currentEnrollment.setSection(enrollment.getSection());
+        currentEnrollment.setStudent(enrollment.getStudent());
+ 
+        enrollmentService.createEnrollment(currentEnrollment);
+        return new ResponseEntity<Enrollment>(currentEnrollment, HttpStatus.OK);
+    }
+    
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	@DeleteMapping("/enrollment/{id}")
+    public ResponseEntity<?> deleteEnrollment(@PathVariable("id") long id) {
+ 
+    	Enrollment enrollment = enrollmentService.getEnrollmentById(id);
+        if (enrollment == null) {
+            return new ResponseEntity(new CustomError("Unable to delete. Enrollment with id " + id + " not found."),
+                    HttpStatus.NOT_FOUND);
+        }
+        enrollmentService.deleteEnrollment(id);
+        return new ResponseEntity<Enrollment>(HttpStatus.NO_CONTENT);
+    }
 
 }

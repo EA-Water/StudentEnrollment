@@ -13,5 +13,8 @@ public interface EnrollmentService {
     List<Enrollment> viewEnrollment();
     List<Enrollment> getEnrollmentByStudent(Student student);
     List<Enrollment> getEnrollmentBySection(Section section);
+    boolean isEnrollmentExit(Enrollment Enrollment);
+    Enrollment getEnrollmentById(long id);
+    void deleteEnrollment(long id);
 
 }
