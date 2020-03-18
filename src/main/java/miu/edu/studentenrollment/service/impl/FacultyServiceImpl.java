@@ -38,9 +38,9 @@ public class FacultyServiceImpl implements FacultyService {
 	@Override
 	public Faculty updateFaculity(Faculty faculity) throws Exception {
 
-		if (faculityRepo.findById(faculity.getId()).get() == null) {
-			throw new Exception("Something is wrong");
-		}
+//		if (faculityRepo.findById(faculity.getId()).get() == null) {
+//			throw new Exception("Something is wrong");
+//		}
 		return faculityRepo.save(faculity);
 
 	}
