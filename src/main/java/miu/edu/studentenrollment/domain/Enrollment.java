@@ -1,11 +1,8 @@
 package miu.edu.studentenrollment.domain;
 
-<<<<<<< HEAD
-=======
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.engine.internal.Cascade;
 
->>>>>>> 31a43ef9a0509d37f1ee9e2a47d30134c3642a9a
 import javax.persistence.*;
 import javax.validation.Valid;
 

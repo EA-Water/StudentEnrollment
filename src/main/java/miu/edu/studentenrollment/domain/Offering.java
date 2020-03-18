@@ -16,22 +16,13 @@ public class Offering {
 
     @Column(unique = true)
     private String offeringCode;
-<<<<<<< HEAD
-    
-=======
 
 
     @JsonIgnore
->>>>>>> 31a43ef9a0509d37f1ee9e2a47d30134c3642a9a
     @Valid
     @ManyToOne
     @JoinColumn(name="block_id")
     private Block block;
-<<<<<<< HEAD
-    
-=======
-    @JsonIgnore
->>>>>>> 31a43ef9a0509d37f1ee9e2a47d30134c3642a9a
     @Valid
     @ManyToOne
     @JoinColumn(name="course_id")

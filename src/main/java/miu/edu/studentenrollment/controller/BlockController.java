@@ -2,14 +2,10 @@ package miu.edu.studentenrollment.controller;
 
 import miu.edu.studentenrollment.domain.Block;
 import miu.edu.studentenrollment.service.BlockService;
-
-<<<<<<< HEAD
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-=======
 import org.springframework.web.bind.annotation.*;
->>>>>>> 31a43ef9a0509d37f1ee9e2a47d30134c3642a9a
 
 import javax.annotation.Resource;
 import java.util.List;
