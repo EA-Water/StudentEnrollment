@@ -1,0 +1,18 @@
+INSERT INTO `block` (`id`, `block_code`, `block_name`, `block_semester`, `block_sequence_number`, `start_date`, `end_date`) VALUES ('1', '2020-03', 'March 2020', 'Spring', '3', '2020-02-13', '2020-02-12');
+INSERT INTO `block` (`id`, `block_code`, `block_name`, `block_semester`, `block_sequence_number`, `start_date`, `end_date`) VALUES ('2', '2020-02', 'February 2020', 'Winter', '2', '2020-01-13', '2020-02-13');
+INSERT INTO `course` (`id`, `course_code`, `course_name`, `description`) VALUES ('1', 'cs544', 'EA', 'Enterprise Architecture');
+INSERT INTO `course` (`id`, `course_code`, `course_name`, `description`) VALUES ('2', 'cs454', 'WAA', 'Web Application Architecture');
+INSERT INTO `address` (`address_id`, `street`, `city`, `postal_code`, `country`) VALUES ('1', '1000 4th N st', 'Fairfield', '52557', 'USA');
+INSERT INTO `address` (`address_id`, `street`, `city`, `postal_code`, `country`) VALUES ('2', '611 W Jackson Ave', 'Fairfield', '52556', 'USA');
+INSERT INTO `faculty` (`id`, `faculty_name`, `faculty_title`) VALUES ('1', 'Payman Salek', 'Prof.');
+INSERT INTO `faculty` (`id`, `faculty_name`, `faculty_title`) VALUES ('2', 'Joe Brune', 'Prof.');
+INSERT INTO `entry` (`id`, `enrollment_end_date`, `enrollment_start_date`, `entry_name`, `entry_start_date`) VALUES ('1', '2022-04-13', '2019-08-06', 'August 2019', '2019-08-06');
+INSERT INTO `entry` (`id`, `enrollment_end_date`, `enrollment_start_date`, `entry_name`, `entry_start_date`) VALUES ('2', '2022-07-13', '2019-11-06', 'November 2019', '2019-11-06');
+INSERT INTO `offering` (`id`, `offering_code`, `block_id`, `course_id`) VALUES ('1', 'cs544-2020-03', '1', '1');
+INSERT INTO `offering` (`id`, `offering_code`, `block_id`, `course_id`) VALUES ('2', 'cs454-2020-02', '2', '2');
+INSERT INTO `section` (`id`, `faculty_id`, `offering_id`) VALUES ('1', '1', '1');
+INSERT INTO `section` (`id`, `faculty_id`, `offering_id`) VALUES ('2', '2', '2');
+INSERT INTO `student` (`id`, `first_name`, `last_name`, `student_email`, `student_id`, `entry_id`, `home_address_id`, `mailing_address_id`) VALUES ('1', 'James', 'Gosling', 'jgosing@miu.edu', '610502', '1', '1', '1');
+INSERT INTO `student` (`id`, `first_name`, `last_name`, `student_email`, `student_id`, `entry_id`, `home_address_id`, `mailing_address_id`) VALUES ('2', 'Jack', 'Dorse', 'jdorse@miu.edu', '610503', '1', '1', '2');
+INSERT INTO `enrollment` (`id`, `section_id`, `student_id`) VALUES ('1', '1', '1');
+INSERT INTO `enrollment` (`id`, `section_id`, `student_id`) VALUES ('2', '1', '2');

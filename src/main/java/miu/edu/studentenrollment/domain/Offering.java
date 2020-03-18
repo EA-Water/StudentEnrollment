@@ -1,8 +1,5 @@
 package miu.edu.studentenrollment.domain;
 
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import javax.validation.Valid;
 
@@ -17,8 +14,6 @@ public class Offering {
     @Column(unique = true)
     private String offeringCode;
 
-
-    @JsonIgnore
     @Valid
     @ManyToOne
     @JoinColumn(name="block_id")
