@@ -10,6 +10,8 @@ public class User {
     @Id
     @GeneratedValue
     private Long id;
+
+    @Column(unique = true)
     private String userName;
     private String password;
     private String email;

@@ -1,6 +1,8 @@
 package miu.edu.studentenrollment.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
@@ -14,19 +16,25 @@ public class Student {
     private Long id;
     @Column(unique = true)
     private String studentId;
-    private String studentName;
+    private String firstName;
+    private String lastName;
 
+    @Transient
+    private Long idSaving;
     @Email
     private String studentEmail;
 
     @OneToMany(mappedBy = "student")
+    @JsonIgnore
     private List<Enrollment> enrollment;
 
+//    @JsonIgnore
     @Valid
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="mailing_address_id")
     private Address mailingAddress;
 
+//    @JsonIgnore
     @Valid
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="home_address_id")
@@ -36,6 +44,7 @@ public class Student {
     @Valid
     @ManyToOne
     @JoinColumn(name ="entry_id")
+  // @JsonIgnore
     private Entry entry;
 
 
@@ -59,12 +68,20 @@ public class Student {
         this.studentId = studentId;
     }
 
-    public String getStudentName() {
-        return studentName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setStudentName(String studentName) {
-        this.studentName = studentName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getStudentEmail() {
@@ -105,5 +122,13 @@ public class Student {
 
     public void setEntry(Entry entry) {
         this.entry = entry;
+    }
+
+    public Long getIdSaving() {
+        return idSaving;
+    }
+
+    public void setIdSaving(Long idSaving) {
+        this.idSaving = idSaving;
     }
 }

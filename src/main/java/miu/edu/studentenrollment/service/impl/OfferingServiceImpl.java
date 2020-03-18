@@ -3,6 +3,7 @@ package miu.edu.studentenrollment.service.impl;
 import java.util.List;
 import java.util.Optional;
 
+import miu.edu.studentenrollment.service.OfferingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -13,8 +14,12 @@ import miu.edu.studentenrollment.repository.OfferingRepository;
 import miu.edu.studentenrollment.service.OfferingService;
 
 @Service
+<<<<<<< HEAD
 @Transactional(propagation = Propagation.REQUIRED)
 public class OfferingServiceImpl implements OfferingService{
+=======
+public class OfferingServiceImpl implements OfferingService {
+>>>>>>> 31a43ef9a0509d37f1ee9e2a47d30134c3642a9a
 
 	@Autowired
 	OfferingRepository offeringRepository;

@@ -1,5 +1,7 @@
 package miu.edu.studentenrollment.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.FutureOrPresent;
@@ -18,11 +20,12 @@ public class Entry {
     @FutureOrPresent
     private Date entryStartDate;
     @Future
-    private Date enrollmnetStartDate;
+    private Date enrollmentStartDate;
     @Future
-    private Date enrollmnetEndDate;
+    private Date enrollmentEndDate;
 
     @OneToMany(mappedBy = "entry")
+    @JsonIgnore
 //    @Immutable
     private List<Student> studentList;
 
@@ -50,20 +53,20 @@ public class Entry {
         this.entryStartDate = entryStartDate;
     }
 
-    public Date getEnrollmnetStartDate() {
-        return enrollmnetStartDate;
+    public Date getEnrollmentStartDate() {
+        return enrollmentStartDate;
     }
 
-    public void setEnrollmnetStartDate(Date enrollmnetStartDate) {
-        this.enrollmnetStartDate = enrollmnetStartDate;
+    public void setEnrollmentStartDate(Date enrollmnetStartDate) {
+        this.enrollmentStartDate = enrollmnetStartDate;
     }
 
-    public Date getEnrollmnetEndDate() {
-        return enrollmnetEndDate;
+    public Date getEnrollmentEndDate() {
+        return enrollmentEndDate;
     }
 
-    public void setEnrollmnetEndDate(Date enrollmnetEndDate) {
-        this.enrollmnetEndDate = enrollmnetEndDate;
+    public void setEnrollmentEndDate(Date enrollmnetEndDate) {
+        this.enrollmentEndDate = enrollmnetEndDate;
     }
 
     public List<Student> getStudentList() {

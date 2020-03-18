@@ -1,6 +1,8 @@
 package miu.edu.studentenrollment.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -17,6 +19,7 @@ public class Faculty {
     private String facultyTitle;
 
     @OneToOne(mappedBy = "faculty")
+    @JsonIgnore
     private Section section;
 
     public Long getId() {

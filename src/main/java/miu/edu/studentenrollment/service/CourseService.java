@@ -6,9 +6,9 @@ import java.util.Optional;
 import miu.edu.studentenrollment.domain.Course;
 
 public interface CourseService {
-	public Course saveCourse(Course course);
+	public Course createCourse(Course course);
 	public List<Course> courses();
 	public Course updateCourse(Course course) throws Exception;
-	public void deleteCourse(Course course);
-	public Course getOneCourse(Long id);
+	public String removeCourse(Course course);
+	public Course getCourseById(Long id);
 }

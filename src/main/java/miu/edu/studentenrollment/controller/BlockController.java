@@ -3,39 +3,51 @@ package miu.edu.studentenrollment.controller;
 import miu.edu.studentenrollment.domain.Block;
 import miu.edu.studentenrollment.service.BlockService;
 
+<<<<<<< HEAD
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+=======
+import org.springframework.web.bind.annotation.*;
+>>>>>>> 31a43ef9a0509d37f1ee9e2a47d30134c3642a9a
 
 import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
-@RequestMapping(value="/block")
+@CrossOrigin
+@RequestMapping(value="/blocks")
 public class BlockController {
 
-    @Resource
-    private BlockService blockService;
+	@Resource
+	private BlockService blockService;
 
-    @RequestMapping(value="/allBlocks")
-    public List<Block> findAll(){
-        return blockService.findAll();
-    }
+	@GetMapping(value = "/")
+	public List<Block> getAllBlock() {
+		return blockService.getAllBlock();
+	}
 
-    @RequestMapping(value="/{Id}")
-    public Block findById(@PathVariable Long Id){
-        return blockService.findById(Id);
-    }
+	@GetMapping(value = "/{Id}")
+	public Block getBlockById(@PathVariable Long Id) {
+		return blockService.getBlockById(Id);
+	}
 
-    @RequestMapping(value = "/add")
-    public List<Block> addBlock(Block block){
-        blockService.save(block);
-        return blockService.findAll();
-    }
+	@PostMapping(value = "/")
+	public List<Block> createBlock(@RequestBody Block block) {
+		blockService.createBlock(block);
+		return blockService.getAllBlock();
+	}
 
-    @RequestMapping(value="/delete/{Id}")
-    public List<Block> deleteBlock(@PathVariable Long Id){
-        blockService.deleteById(Id);
-        return blockService.findAll();
-    }
+	@PutMapping("/{id}")
+	public void updateBlock(@PathVariable Long id, @RequestBody Block block) {
+
+		try {
+			block.setId(id);
+			blockService.updateBlock(block);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+	}
+
 }

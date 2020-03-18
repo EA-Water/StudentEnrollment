@@ -23,12 +23,19 @@ public class Block {
     private String blockName;
     private String blockSemester;
     private String blockSequenceNumber;
+<<<<<<< HEAD
     @FutureOrPresent
     @Temporal(TemporalType.DATE)
     private Date startDate;
 
     @Future
     @Temporal(TemporalType.DATE)
+=======
+//    @FutureOrPresent
+    private Date startDate;
+
+//    @Future
+>>>>>>> 31a43ef9a0509d37f1ee9e2a47d30134c3642a9a
     private Date endDate;
 
     public Block() {
