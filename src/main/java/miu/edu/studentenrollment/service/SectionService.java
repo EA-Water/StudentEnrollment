@@ -13,4 +13,5 @@ public interface SectionService {
     public Section updateSection(Section section, Long id) throws Exception;
 
     public Section getSectionById(Long id) throws Exception;
+
 }

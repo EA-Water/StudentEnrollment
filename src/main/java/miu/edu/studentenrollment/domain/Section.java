@@ -7,27 +7,24 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Entity
+@Table(uniqueConstraints=@UniqueConstraint(columnNames={"faculty_id", "offering_id"}))
 public class Section {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "section")
     private List<Enrollment> enrollmentList;
 
     @Valid
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="faculty_id")
-
-    @com.fasterxml.jackson.annotation.JsonIgnore
     private Faculty faculty;
 
 
     @ManyToOne
     @JoinColumn(name="offering_id")
-    @JsonIgnore
     private Offering offering;
 
 

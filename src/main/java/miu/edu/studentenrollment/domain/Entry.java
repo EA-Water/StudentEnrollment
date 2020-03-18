@@ -1,5 +1,6 @@
 package miu.edu.studentenrollment.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -19,12 +20,15 @@ public class Entry {
     private String entryName;
     @Temporal(TemporalType.DATE)
     @FutureOrPresent
+    @JsonFormat(timezone = "CST")
     private Date entryStartDate;
     @Temporal(TemporalType.DATE)
     @Future
+    @JsonFormat(timezone = "CST")
     private Date enrollmentStartDate;
     @Temporal(TemporalType.DATE)
     @Future
+    @JsonFormat(timezone = "CST")
     private Date enrollmentEndDate;
 
     @OneToMany(mappedBy = "entry")

@@ -20,6 +20,7 @@ public class Faculty {
     private String facultyTitle;
 
     @OneToOne(mappedBy = "faculty", fetch = FetchType.EAGER)
+    @JsonIgnore
     private Section section;
 
     public Long getId() {
