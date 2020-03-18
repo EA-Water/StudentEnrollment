@@ -17,10 +17,13 @@ public class Entry {
 
     @Column(unique = true)
     private String entryName;
+    @Temporal(TemporalType.DATE)
     @FutureOrPresent
     private Date entryStartDate;
+    @Temporal(TemporalType.DATE)
     @Future
     private Date enrollmentStartDate;
+    @Temporal(TemporalType.DATE)
     @Future
     private Date enrollmentEndDate;
 
