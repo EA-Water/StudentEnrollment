@@ -4,7 +4,11 @@ import miu.edu.studentenrollment.controller.EntryController;
 import miu.edu.studentenrollment.domain.Address;
 import miu.edu.studentenrollment.domain.Entry;
 import miu.edu.studentenrollment.domain.Student;
+import miu.edu.studentenrollment.repository.AddressRepo;
+import miu.edu.studentenrollment.repository.OfferingRepository;
+import miu.edu.studentenrollment.repository.StudentRepo;
 import miu.edu.studentenrollment.service.impl.EntryServiceImpl;
+import miu.edu.studentenrollment.service.impl.OfferingServiceImpl;
 import miu.edu.studentenrollment.service.impl.StudentServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,15 +19,22 @@ import org.mockito.stubbing.Answer;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class StudentServiceImplTest {
-    @Mock
+    @InjectMocks
     StudentServiceImpl studentService;
+
+    @Mock
+    StudentRepo studentRepository;
+
+    @Mock
+    AddressRepo addressRepository;
 
     Entry entry = new Entry();
     Address address = new Address();
@@ -44,7 +55,7 @@ public class StudentServiceImplTest {
         student.setStudentId("Reza");
         student.setFirstName("Rezaur");
         student.setLastName("Rahman");
-        student.setId(1L);
+        student.setIdSaving(1L);
         student.setStudentEmail("reza5630@gmail.com");
         student.setHomeAddress(address);
         student.setMailingAddress(address);
@@ -54,7 +65,8 @@ public class StudentServiceImplTest {
     @Test
     void testCreateStudent() {
         try {
-            when(studentService.createStudent(student)).thenReturn(student);
+            when(studentRepository.save(student)).thenReturn(student);
+            when(addressRepository.findAll()).thenReturn(Collections.emptyList());
             assertEquals(student, studentService.createStudent(student));
         } catch (Exception e) {
             e.printStackTrace();
@@ -64,8 +76,8 @@ public class StudentServiceImplTest {
     @Test
     void testGetStudent(){
         try {
-            when(studentService.getStudent(3L)).thenReturn(student);
-            assertEquals(student, studentService.getStudent(3L));
+            when(studentRepository.getOne(1L)).thenReturn(student);
+            assertEquals(student, studentService.getStudent(1L));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -74,20 +86,21 @@ public class StudentServiceImplTest {
     @Test
     void testGetAllStudents(){
         try {
-            when(studentService.getAllStudents()).thenReturn(stuList);
+            when(studentRepository.findAll()).thenReturn(stuList);
             assertEquals(stuList, studentService.getAllStudents());
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-//    @Test
-//    void testCountStudents(){
-//        try {
-//            when(studentService.countStudents()).then(1L);
-//            assertEquals(student, studentService.getStudent(3L));
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
+    @Test
+    void deleteOfferingTest()
+    {
+        try {
+            studentService.removeStudent(1L);
+            verify(studentRepository, times(1)).deleteById(1L);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
