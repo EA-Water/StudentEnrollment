@@ -38,9 +38,13 @@ public class CourseServiceImpl implements CourseService {
 	}
 
 	@Override
-	public void deleteCourse(Course course) {
-		courseRepo.delete(course);
-
+	public String deleteCourse(Course course) {
+		try {
+			courseRepo.delete(course);	
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return "Course deleted successfully";
 	}
 
 	@Override

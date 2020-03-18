@@ -42,13 +42,14 @@ public class StudentServiceImplTest {
         entry.setId(1L);
         entry.setEntryName("August-2020");
         entry.setEntryStartDate(new Date());
-        entry.setEnrollmnetStartDate(new Date());
-        entry.setEnrollmnetEndDate(new Date());
+        entry.setEnrollmentStartDate(new Date());
+        entry.setEnrollmentEndDate(new Date());
 
         student.setEntry(entry);
         student.setId(3L);
         student.setStudentId("Reza");
-        student.setStudentName("Rezaur Rahman");
+        student.setFirstName("Rezaur");
+        student.setLastName("Rahman");
         student.setStudentEmail("reza5630@gmail.com");
         student.setHomeAddress(address);
         student.setMailingAddress(address);

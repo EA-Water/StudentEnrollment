@@ -1,4 +1,4 @@
-package miu.edu.studentenrollment.service.impl;
+package miu.edu.studentenrollment.service;
 
 import java.util.List;
 

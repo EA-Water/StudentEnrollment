@@ -11,33 +11,26 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import miu.edu.studentenrollment.domain.Faculty;
-import miu.edu.studentenrollment.service.impl.FaculityServiceImpl;
+import miu.edu.studentenrollment.service.impl.FacultyServiceImpl;
 
 @DisplayName("Faculty Services Test Cases")
 public class FacultyServiceImplTest {
 
-//	@InjectMocks
-//	EntryController entryController;
-//
-//	MockMvc mockMvc;
-
 	@Mock
-	FaculityServiceImpl facultyService;
+	FacultyServiceImpl facultyService;
 
 	Faculty faculty1 = new Faculty();
 	Faculty faculty2 = new Faculty();
-	List<Faculty> facultyList = new ArrayList<>();
+	List<Faculty> facultyList = new ArrayList<>(); 
 
 	@BeforeEach
 	void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
-//		mockMvc = MockMvcBuilders.standaloneSetup(entryController).build();
 		faculty1.setId(1L);
 		faculty1.setFacultyName("Payman Salek");
 		faculty1.setFacultyTitle("professor");
 		facultyList.add(faculty1);
 		facultyList.add(faculty2);
-		// faculty1.setSection(section);
 	}
 
 	@Test
