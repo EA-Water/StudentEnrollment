@@ -1,6 +1,8 @@
 package miu.edu.studentenrollment.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
@@ -23,13 +25,16 @@ public class Student {
     private String studentEmail;
 
     @OneToMany(mappedBy = "student")
+    @JsonIgnore
     private List<Enrollment> enrollment;
 
+    @JsonIgnore
     @Valid
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="mailing_address_id")
     private Address mailingAddress;
 
+    @JsonIgnore
     @Valid
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="home_address_id")
@@ -39,6 +44,7 @@ public class Student {
     @Valid
     @ManyToOne
     @JoinColumn(name ="entry_id")
+    @JsonIgnore
     private Entry entry;
 
 

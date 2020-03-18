@@ -1,5 +1,6 @@
 package miu.edu.studentenrollment.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.engine.internal.Cascade;
 
 import javax.persistence.*;
@@ -12,11 +13,13 @@ public class Enrollment {
     @GeneratedValue
     private Long id;
 
+    @JsonIgnore
     @Valid
     @ManyToOne(cascade= CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name="student_id")
     private Student student;
 
+    @JsonIgnore
     @Valid
     @ManyToOne(cascade= CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name="section_id")

@@ -1,5 +1,7 @@
 package miu.edu.studentenrollment.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.Valid;
 import java.util.List;
@@ -11,17 +13,21 @@ public class Section {
     @GeneratedValue
     private Long id;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "section")
     private List<Enrollment> enrollmentList;
 
     @Valid
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="faculty_id")
+
+    @com.fasterxml.jackson.annotation.JsonIgnore
     private Faculty faculty;
 
 
     @ManyToOne
     @JoinColumn(name="offering_id")
+    @JsonIgnore
     private Offering offering;
 
 

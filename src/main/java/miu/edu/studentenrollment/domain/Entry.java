@@ -1,5 +1,7 @@
 package miu.edu.studentenrollment.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.FutureOrPresent;
@@ -23,6 +25,7 @@ public class Entry {
     private Date enrollmentEndDate;
 
     @OneToMany(mappedBy = "entry")
+    @JsonIgnore
 //    @Immutable
     private List<Student> studentList;
 
