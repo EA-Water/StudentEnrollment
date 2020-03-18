@@ -10,42 +10,44 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
+@RequestMapping("/students")
 public class StudentController {
     @Autowired
     private StudentService studentService;
 
-    @PostMapping("/create/student")
-    public Student addStudent(@RequestBody @Valid Student student)  {
-        return studentService.addStudent(student);
+
+    @PostMapping("/")
+    public Student createStudent(@RequestBody @Valid Student student)  {
+        return studentService.createStudent(student);
     }
 
-    @DeleteMapping("/remove/student/{studentID}")
-    public String removeStudentByID(@PathVariable Long studentID){
-        studentService.removeStudentByID(studentID);
+    @DeleteMapping("/{studentID}")
+    public String removeStudent(@PathVariable Long studentID){
+        studentService.removeStudent(studentID);
         return "Delete Successful";
     }
 
-    @PutMapping("/update/student/{studentID}")
+    @PutMapping("/{studentID}")
     public Student updateStudent(@PathVariable Long studentID, @RequestBody Student student){
-        Student stu = viewStudent(studentID);
+        Student stu = getStudentById(studentID);
         stu = student;
         stu.setId(studentID);
-        return studentService.addStudent(stu);
+        return studentService.createStudent(stu);
     }
 
-    @GetMapping("/count/students")
+    @GetMapping("/count")
     public Long countStudents(){
         return studentService.countStudents();
     }
 
-    @GetMapping("/view/student/{studentID}")
-    public Student viewStudent(@PathVariable Long studentID){
-        return studentService.viewStudent(studentID);
+    @GetMapping("/{studentID}")
+    public Student getStudentById(@PathVariable Long studentID){
+        return studentService.getStudent(studentID);
     }
 
-    @GetMapping("/view/allStudents")
-    public List<Student> viewAllStudents(){
-        return studentService.viewAllStudents();
+    @GetMapping("/")
+    public List<Student> getAllStudents(){
+        return studentService.getAllStudents();
     }
 
 }

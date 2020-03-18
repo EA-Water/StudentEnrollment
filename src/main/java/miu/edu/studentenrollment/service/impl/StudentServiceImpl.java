@@ -1,16 +1,13 @@
 package miu.edu.studentenrollment.service.impl;
 
-import miu.edu.studentenrollment.domain.Entry;
 import miu.edu.studentenrollment.domain.Student;
 import miu.edu.studentenrollment.repository.AddressRepo;
 import miu.edu.studentenrollment.repository.StudentRepo;
 import miu.edu.studentenrollment.service.AddressService;
-import miu.edu.studentenrollment.service.EntryService;
 import miu.edu.studentenrollment.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 
 @Service
@@ -20,20 +17,12 @@ public class StudentServiceImpl implements StudentService {
     private StudentRepo studentRepo;
 
     @Autowired
-    private EntryService entryService;
-
-    @Autowired
     private AddressService addressService;
 
     @Autowired
     private AddressRepo addressRepo;
 
-    public Student addStudent(Student student) {
-//        try {
-//            Entry entry = entryService.findEntry(student.getIdSaving());
-//            student.setEntry(entry);
-//        } catch (Exception e) {
-//        }
+    public Student createStudent(Student student) {
         if (addressRepo.findAll().size() != 0) {
             if (this.addressExists(student.getHomeAddress().getCountry(), student.getHomeAddress().getCity(), student.getHomeAddress().getStreet(), student.getHomeAddress().getPostalCode())) {
                 student.setHomeAddress(addressService.findAddress(student.getHomeAddress().getCountry(), student.getHomeAddress().getCity(), student.getHomeAddress().getStreet(), student.getHomeAddress().getPostalCode()).get(0));
@@ -47,15 +36,15 @@ public class StudentServiceImpl implements StudentService {
         return studentRepo.save(student);
     }
 
-    public void removeStudentByID(Long studentID) {
+    public void removeStudent(Long studentID) {
         studentRepo.deleteById(studentID);
     }
 
-    public Student viewStudent(Long studentID) {
+    public Student getStudent(Long studentID) {
         return studentRepo.getOne(studentID);
     }
 
-    public List<Student> viewAllStudents() {
+    public List<Student> getAllStudents() {
         return studentRepo.findAll();
     }
 
