@@ -2,9 +2,12 @@ package miu.edu.studentenrollment.serviceimptest;
 
 import miu.edu.studentenrollment.controller.BlockController;
 import miu.edu.studentenrollment.domain.Block;
+import miu.edu.studentenrollment.repository.BlockRepo;
+import miu.edu.studentenrollment.service.BlockService;
 import miu.edu.studentenrollment.service.impl.BlockServiceImpl;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.text.SimpleDateFormat;
@@ -16,6 +19,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -31,6 +35,7 @@ class BlockServiceImplTest {
     BlockController blockController;
 
     MockMvc mockMvc;
+    BlockService service = mock(BlockService.class);
 
     @Mock
     BlockServiceImpl blockService;
@@ -64,8 +69,8 @@ class BlockServiceImplTest {
 
         Date startDate2 = simpleDateFormat.parse("2020-04-18");
         Date endDate2 = simpleDateFormat.parse("2020-04-28");
-        block2.setStartDate(startDate);
-        block2.setEndDate(endDate);
+        block2.setStartDate(startDate2);
+        block2.setEndDate(endDate2);
         blockList.add(block1);
         blockList.add(block2);
     }
@@ -73,26 +78,24 @@ class BlockServiceImplTest {
     @Test
     void testCreateBlock() {
         try {
-            when(blockService.save(block1)).thenReturn("Block insertion successful!");
-            assertEquals("Block insertion successful!", blockService.save(block1));
+            when(blockService.save(block1)).thenReturn(block1);
+            assertEquals(block1, blockService.save(block1));
         } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
 
-    public String makeItJson(Object obj) {
-        try {
-            return new ObjectMapper().writeValueAsString(obj);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+    @Test
+    void testBlockListSize() throws Exception {
+        when(blockService.findAll()).thenReturn(blockList);
+        assertEquals(2, blockService.findAll().size());
     }
 
     @Test
     void testViewAllBlocks() throws Exception {
         when(blockService.findAll()).thenReturn(blockList);
-        assertEquals(2, blockService.findAll().size());
+        assertEquals(blockList, blockService.findAll());
     }
 
     @Test
@@ -101,7 +104,7 @@ class BlockServiceImplTest {
             when(blockService.updateBlock(block1)).thenReturn(block1);
             assertEquals(block1, blockService.updateBlock(block1));
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 
@@ -111,7 +114,7 @@ class BlockServiceImplTest {
             when(blockService.findById((long) 1)).thenReturn(block1);
             assertEquals(block1, blockService.findById((long) 1));
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 

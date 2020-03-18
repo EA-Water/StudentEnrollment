@@ -21,10 +21,10 @@ public class Block {
     private String blockName;
     private String blockSemester;
     private String blockSequenceNumber;
-    @FutureOrPresent
+//    @FutureOrPresent
     private Date startDate;
 
-    @Future
+//    @Future
     private Date endDate;
 
     public Block() {

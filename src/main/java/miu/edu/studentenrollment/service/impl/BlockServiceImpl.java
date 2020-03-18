@@ -12,18 +12,18 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class BlockServiceImpl implements BlockService {
 
 	@Autowired
 	private BlockRepo repo;
 
 	@Override
-	@Transactional
 	public List<Block> findAll() {
 		return (List<Block>) repo.findAll();
 	}
 
-	@Transactional
+	@Override
 	public Block findById(Long theId) {
 		Optional<Block> result = repo.findById(theId);
 		Block block = null;
@@ -36,22 +36,16 @@ public class BlockServiceImpl implements BlockService {
 	}
 
 	@Override
-	@Transactional
-	public String save(Block block) {
-		try {
-			repo.save(block);
-		}catch(Exception e){
-
-		}
-		return "Block insertion successful!";
+	public Block save(Block block) {
+			return repo.save(block);
 	}
 
 	@Override
 	public Block updateBlock(Block block) throws Exception {
-
 		if (repo.findById(block.getId()).get() == null) {
-			throw new Exception("Something is wrong");
+			throw new Exception("Could not find the block");
 		}
 		return repo.save(block);
 	}
+
 }

@@ -10,7 +10,6 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-//@RequestMapping(value = "/block")
 public class BlockController {
 
 	@Resource
@@ -26,7 +25,7 @@ public class BlockController {
 		return blockService.findById(Id);
 	}
 
-	@PostMapping(value = "/block/add")
+	@PostMapping(value = "/block/addBlock")
 	public List<Block> addBlock(@RequestBody Block block) {
 		blockService.save(block);
 		return blockService.findAll();
@@ -40,6 +39,7 @@ public class BlockController {
 			blockService.updateBlock(block);
 		} catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
 		}
 	}
 
