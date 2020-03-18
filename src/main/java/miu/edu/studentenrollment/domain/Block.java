@@ -1,5 +1,7 @@
 package miu.edu.studentenrollment.domain;
 
+import org.graalvm.compiler.lir.LIRInstruction;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,8 +29,8 @@ public class Block {
     @Temporal(TemporalType.DATE)
     private Date startDate;
 
-
     @Future
+    @Temporal(TemporalType.DATE)
     private Date endDate;
 
     public Block() {
