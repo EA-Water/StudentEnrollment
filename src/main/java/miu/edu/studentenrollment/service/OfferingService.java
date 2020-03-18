@@ -18,8 +18,8 @@ public interface OfferingService {
     
     void updateOffering(Offering offering);
     
-    void deleteOffering(long id);
+    void removeOffering(long id);
     
-    void deleteAllOfferings();
+    void removeAllOfferings();
 
 }

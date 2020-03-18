@@ -121,7 +121,7 @@ public class OfferingServiceImplTest {
 	void deleteOfferingTest()
 	{
 		try {
-			offeringService.deleteOffering(1L);
+			offeringService.removeOffering(1L);
 	        verify(offeringRepository, times(1)).deleteById(1L);
 		}catch (Exception e) {
             e.printStackTrace();
@@ -132,7 +132,7 @@ public class OfferingServiceImplTest {
 	void deleteAllOfferingsTest()
 	{
 		try {
-			offeringService.deleteAllOfferings();
+			offeringService.removeAllOfferings();
 	        verify(offeringRepository, times(1)).deleteAll();
 		}catch (Exception e) {
             e.printStackTrace();

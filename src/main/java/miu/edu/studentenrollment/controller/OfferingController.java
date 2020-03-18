@@ -28,7 +28,7 @@ public class OfferingController {
 	OfferingService offeringService;
 	
 	@GetMapping("/")
-    public ResponseEntity<List<Offering>> listAllOffering() {
+    public ResponseEntity<List<Offering>> getAllOffering() {
         List<Offering> offerings = offeringService.getAllOffering();
         if (offerings.isEmpty()) {
             return new ResponseEntity<List<Offering>>(HttpStatus.NO_CONTENT);
@@ -37,7 +37,7 @@ public class OfferingController {
     }
  
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	@GetMapping("/search/{searchString}")
+	@GetMapping("/{searchString}")
     public ResponseEntity<?> getOffering(@PathVariable("searchString") String searchString) {
     	 List<Offering> offerings = offeringService.searchOfferings(searchString);
         if (offerings.isEmpty()) {
@@ -47,14 +47,8 @@ public class OfferingController {
         return new ResponseEntity<List<Offering>>(offerings, HttpStatus.OK);
     }
 	
-	@GetMapping("/addNewOffering")
-	public String addNewOffering(Offering offering)
-	{
-		return "add Form";
-	}
-	
     @SuppressWarnings({ "unchecked", "rawtypes" })
-	@PostMapping("/addNewOffering")
+	@PostMapping("/")
     public ResponseEntity<?> createOffering(@RequestBody Offering offering, UriComponentsBuilder ucBuilder) {
  
         if (offeringService.isOfferingExit(offering)) {
@@ -70,7 +64,7 @@ public class OfferingController {
     }
  
     @SuppressWarnings({ "rawtypes", "unchecked" })
-	@PutMapping("/offering/{id}")
+	@PutMapping("/{id}")
     public ResponseEntity<?> updateOffering(@PathVariable("id") long id, @RequestBody Offering offering) {
     	Offering currentOffering = offeringService.getOfferingById(id);
  
@@ -88,21 +82,21 @@ public class OfferingController {
     }
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
-	@DeleteMapping("/offering/{id}")
-    public ResponseEntity<?> deleteOffering(@PathVariable("id") long id) {
+	@DeleteMapping("/{id}")
+    public ResponseEntity<?> removeOffering(@PathVariable("id") long id) {
  
     	Offering offering = offeringService.getOfferingById(id);
         if (offering == null) {
             return new ResponseEntity(new CustomError("Unable to delete. Offering with id " + id + " not found."),
                     HttpStatus.NOT_FOUND);
         }
-        offeringService.deleteOffering(id);
+        offeringService.removeOffering(id);
         return new ResponseEntity<Offering>(HttpStatus.NO_CONTENT);
     }
     
     @DeleteMapping("/")
-    public ResponseEntity<Offering> deleteAllOfferings() { 
-    	offeringService.deleteAllOfferings();
+    public ResponseEntity<Offering> removeAllOfferings() { 
+    	offeringService.removeAllOfferings();
         return new ResponseEntity<Offering>(HttpStatus.NO_CONTENT);
     }
 

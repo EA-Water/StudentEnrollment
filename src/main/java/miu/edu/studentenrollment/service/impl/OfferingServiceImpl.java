@@ -56,13 +56,13 @@ public class OfferingServiceImpl implements OfferingService{
 	}
 
 	@Override
-	public void deleteOffering(long id) {
+	public void removeOffering(long id) {
 		// TODO Auto-generated method stub
 		offeringRepository.deleteById(id);
 	}
 
 	@Override
-	public void deleteAllOfferings() {
+	public void removeAllOfferings() {
 		// TODO Auto-generated method stub
 		offeringRepository.deleteAll();
 	}
