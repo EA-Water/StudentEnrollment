@@ -31,9 +31,9 @@ public class CourseServiceImpl implements CourseService {
 
 	@Override
 	public Course updateCourse(Course course) throws Exception {
-		if(courseRepo.findById(course.getId()).get()==null) {
-			throw new Exception("Something is wrong");
-		}
+//		if(courseRepo.findById(course.getId()).get()==null) {
+//			throw new Exception("Something is wrong");
+//		}
 		return courseRepo.save(course);
 	}
 

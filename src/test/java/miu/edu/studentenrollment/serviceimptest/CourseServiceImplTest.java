@@ -1,6 +1,9 @@
 package miu.edu.studentenrollment.serviceimptest;
 
+import static org.hamcrest.CoreMatchers.everyItem;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -16,7 +19,9 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import miu.edu.studentenrollment.controller.CourseController;
 import miu.edu.studentenrollment.domain.Course;
+import miu.edu.studentenrollment.repository.CourseRepository;
 import miu.edu.studentenrollment.service.CourseService;
+import miu.edu.studentenrollment.service.impl.CourseServiceImpl;
 
 @DisplayName("Course Service Test Cases")
 public class CourseServiceImplTest {
@@ -25,8 +30,11 @@ public class CourseServiceImplTest {
 	
 	//MockMvc mockMvc;
 	
+	@InjectMocks
+	CourseServiceImpl courseService;
+	
 	@Mock
-	CourseService courseService;
+	CourseRepository courseRepository;
 	
 	Course course1 = new Course();
 	Course course2 = new Course();
@@ -40,37 +48,53 @@ public class CourseServiceImplTest {
 		course1.setCourseCode("CS522");
 		course1.setDescription("programming");
 		courses.add(course1);
+		courses.add(course2);
 	}
 	@Test
-	void testSaveCourse() {
+	void testCreateCourse() {
 		try {
-			when(courseService.createCourse(course1)).thenReturn(course1);
-			assertEquals(course1, courseService.createCourse(course1));
+			courseService.createCourse(course1);
+			verify(courseRepository, times(1)).save(course1);
 			
 		}catch (Exception e) {
             e.printStackTrace();
 	}
 	}
 	@Test
-	void testCourses() throws Exception  {
-		when(courseService.getAllCourses()).thenReturn(courses);
-		assertEquals(1, courseService.getAllCourses().size());
+	void testgetAllCourses() throws Exception  {
+		when(courseRepository.findAll()).thenReturn(courses);
+		assertEquals(2, courseService.getAllCourses().size());
 		
 	}
 	@Test
 	void UpdateCourse() throws Exception  {
-		when(courseService.updateCourse(course1)).thenReturn(course1);
-		assertEquals(course1, courseService.updateCourse(course1));
+		try {
+			courseService.updateCourse(course1);
+			verify(courseRepository, times(1)).save(course1);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}	
 	}
 	
+	@Test
 	void testDeleteCourse() throws Exception{
-		when(courseService.removeCourse(course1)).thenReturn("Course deleted successfully");
-		assertEquals("Course deleted successfully", courseService.removeCourse(course1));
+		try {
+			courseService.removeCourse(course2);
+			verify(courseRepository, times(1)).delete(course2);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		
 	}
 	@Test
-	void testGetOneCourse() throws Exception{
-		when(courseService.getCourseById(1L)).thenReturn(course1);
-		assertEquals(course1, courseService.getCourseById(1L));
+	void testGetCourseById() throws Exception{
+		try {
+			when(courseRepository.getOne(1L)).thenReturn(course1);
+			assertEquals(course1, courseService.getCourseById(1L));
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 }
