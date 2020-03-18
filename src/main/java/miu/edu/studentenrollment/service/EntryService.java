@@ -11,5 +11,7 @@ public interface EntryService {
    Entry findEntry(Long id) throws Exception;
    Entry updateEntry(Entry entry) throws Exception;
    List<Entry> viewEntries();
+   Boolean exist(String name);
+
 
 }

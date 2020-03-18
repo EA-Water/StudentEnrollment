@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import miu.edu.studentenrollment.domain.Offering;
-import miu.edu.studentenrollment.service.impl.OfferingService;
+import miu.edu.studentenrollment.service.OfferingService;
 import miu.edu.studentenrollment.util.CustomError;
 
 @RestController

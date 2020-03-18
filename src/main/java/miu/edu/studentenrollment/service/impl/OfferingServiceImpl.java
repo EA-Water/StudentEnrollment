@@ -2,6 +2,7 @@ package miu.edu.studentenrollment.service.impl;
 
 import java.util.List;
 
+import miu.edu.studentenrollment.service.OfferingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +10,7 @@ import miu.edu.studentenrollment.domain.Offering;
 import miu.edu.studentenrollment.repository.OfferingRepository;
 
 @Service
-public class OfferingServiceImpl implements OfferingService{
+public class OfferingServiceImpl implements OfferingService {
 
 	@Autowired
 	OfferingRepository offeringRepository;

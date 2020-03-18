@@ -9,6 +9,6 @@ public interface CourseService {
 	public Course saveCourse(Course course);
 	public List<Course> courses();
 	public Course updateCourse(Course course) throws Exception;
-	public void deleteCourse(Course course);
+	public String deleteCourse(Course course);
 	public Course getOneCourse(Long id);
 }

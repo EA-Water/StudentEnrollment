@@ -62,5 +62,15 @@ public class CourseServiceImplTest {
 		when(courseService.updateCourse(course1)).thenReturn(course1);
 		assertEquals(course1, courseService.updateCourse(course1));
 	}
-
+	
+	void testDeleteCourse() throws Exception{
+		when(courseService.deleteCourse(course1)).thenReturn("Course deleted successfully");
+		assertEquals("Course deleted successfully", courseService.deleteCourse(course1));
+		
+	}
+	@Test
+	void testGetOneCourse() throws Exception{
+		when(courseService.getOneCourse(1L)).thenReturn(course1);
+		assertEquals(course1, courseService.getOneCourse(1L));
+	}
 }
