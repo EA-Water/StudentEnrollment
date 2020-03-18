@@ -1,6 +1,7 @@
 package miu.edu.studentenrollment.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,7 @@ public class OfferingServiceImpl implements OfferingService{
 	@Override
 	public Offering getOfferingById(long id) {
 		// TODO Auto-generated method stub
-		return offeringRepository.getById(id);
+		return offeringRepository.findById(id);
 	}
 
 	@Override
@@ -45,8 +46,7 @@ public class OfferingServiceImpl implements OfferingService{
 	@Override
 	public boolean isOfferingExit(Offering offering) {
 		// TODO Auto-generated method stub
-		List<Offering> offerings = offeringRepository.findByOfferingCode(offering.getOfferingCode());
-		return !offerings.isEmpty();
+		return offeringRepository.existsByOfferingCode(offering.getOfferingCode());
 	}
 
 	@Override

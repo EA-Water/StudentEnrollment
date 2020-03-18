@@ -12,7 +12,10 @@ import miu.edu.studentenrollment.domain.Offering;
 public interface OfferingRepository extends JpaRepository<Offering, Long>{
 	
 	List<Offering> findByOfferingCode(String offeringCode);
-	Offering getById(long id);
+	Offering findById(long id);
+	
+	@Query("SELECT CASE WHEN COUNT(o) > 0 THEN true ELSE false END FROM Offering o WHERE o.offeringCode = :offeringword")
+    boolean existsByOfferingCode(@Param("offeringword") String offeringword);
    
     @Query("SELECT o FROM Offering o WHERE (o.offeringCode LIKE %:searchvalue%)")
     List<Offering> findOfferings(@Param("searchvalue") String searchvalue);
