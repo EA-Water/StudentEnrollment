@@ -4,6 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.Pattern;
@@ -22,21 +24,14 @@ public class Block {
     private String blockSemester;
     private String blockSequenceNumber;
     @FutureOrPresent
+    @Temporal(TemporalType.DATE)
     private Date startDate;
 
     @Future
+    @Temporal(TemporalType.DATE)
     private Date endDate;
 
     public Block() {
-    }
-
-    public Block(String blockCode,String blockName,String blockSemester,String blockSequenceNumber,Date startDate, Date endDate) {
-        this.blockCode = blockCode;
-        this.blockName = blockName;
-        this.blockSemester = blockSemester;
-        this.blockSequenceNumber = blockSequenceNumber;
-        this.startDate = startDate;
-        this.endDate = endDate;
     }
 
     public Long getId() {

@@ -16,8 +16,17 @@ public class Course {
     @Column(unique = true)
     private String courseName;
     private String description;
+    
+    public Course() { }
+    
+	public Course(String courseCode, String courseName, String description) {
+		super();
+		this.courseCode = courseCode;
+		this.courseName = courseName;
+		this.description = description;
+	}
 
-    public Long getId() {
+	public Long getId() {
         return id;
     }
 
