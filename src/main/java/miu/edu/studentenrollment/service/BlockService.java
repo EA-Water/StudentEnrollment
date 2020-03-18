@@ -6,11 +6,11 @@ import java.util.List;
 
 public interface BlockService {
 
-    public List<Block> findAll();
+    public List<Block> getAllBlock();
 
-    public Block findById(Long theId);
+    public Block getBlockById(Long theId);
 
-    public Block save(Block block);
+    public Block createBlock(Block block);
 
     public Block updateBlock(Block block) throws Exception;
 

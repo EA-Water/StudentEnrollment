@@ -10,28 +10,29 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
+@RequestMapping(value="/blocks")
 public class BlockController {
 
 	@Resource
 	private BlockService blockService;
 
-	@GetMapping(value = "/block/allBlocks")
-	public List<Block> findAll() {
-		return blockService.findAll();
+	@GetMapping(value = "/")
+	public List<Block> getAllBlock() {
+		return blockService.getAllBlock();
 	}
 
-	@GetMapping(value = "/block/{Id}")
-	public Block findById(@PathVariable Long Id) {
-		return blockService.findById(Id);
+	@GetMapping(value = "/{Id}")
+	public Block getBlockById(@PathVariable Long Id) {
+		return blockService.getBlockById(Id);
 	}
 
-	@PostMapping(value = "/block/addBlock")
-	public List<Block> addBlock(@RequestBody Block block) {
-		blockService.save(block);
-		return blockService.findAll();
+	@PostMapping(value = "/")
+	public List<Block> createBlock(@RequestBody Block block) {
+		blockService.createBlock(block);
+		return blockService.getAllBlock();
 	}
 
-	@PutMapping("/block/update/{id}")
+	@PutMapping("/{id}")
 	public void updateBlock(@PathVariable Long id, @RequestBody Block block) {
 
 		try {

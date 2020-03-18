@@ -78,8 +78,8 @@ class BlockServiceImplTest {
     @Test
     void testCreateBlock() {
         try {
-            when(blockService.save(block1)).thenReturn(block1);
-            assertEquals(block1, blockService.save(block1));
+            when(blockService.createBlock(block1)).thenReturn(block1);
+            assertEquals(block1, blockService.createBlock(block1));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -88,14 +88,14 @@ class BlockServiceImplTest {
 
     @Test
     void testBlockListSize() throws Exception {
-        when(blockService.findAll()).thenReturn(blockList);
-        assertEquals(2, blockService.findAll().size());
+        when(blockService.getAllBlock()).thenReturn(blockList);
+        assertEquals(2, blockService.getAllBlock().size());
     }
 
     @Test
     void testViewAllBlocks() throws Exception {
-        when(blockService.findAll()).thenReturn(blockList);
-        assertEquals(blockList, blockService.findAll());
+        when(blockService.getAllBlock()).thenReturn(blockList);
+        assertEquals(blockList, blockService.getAllBlock());
     }
 
     @Test
@@ -111,8 +111,8 @@ class BlockServiceImplTest {
     @Test
     void testFindById() {
         try {
-            when(blockService.findById((long) 1)).thenReturn(block1);
-            assertEquals(block1, blockService.findById((long) 1));
+            when(blockService.getBlockById((long) 1)).thenReturn(block1);
+            assertEquals(block1, blockService.getBlockById((long) 1));
         } catch (Exception e) {
             e.printStackTrace();
         }

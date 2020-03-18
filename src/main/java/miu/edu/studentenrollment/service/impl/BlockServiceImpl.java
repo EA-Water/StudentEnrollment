@@ -19,12 +19,12 @@ public class BlockServiceImpl implements BlockService {
 	private BlockRepo repo;
 
 	@Override
-	public List<Block> findAll() {
+	public List<Block> getAllBlock() {
 		return (List<Block>) repo.findAll();
 	}
 
 	@Override
-	public Block findById(Long theId) {
+	public Block getBlockById(Long theId) {
 		Optional<Block> result = repo.findById(theId);
 		Block block = null;
 		if (result.isPresent()) {
@@ -36,7 +36,7 @@ public class BlockServiceImpl implements BlockService {
 	}
 
 	@Override
-	public Block save(Block block) {
+	public Block createBlock(Block block) {
 			return repo.save(block);
 	}
 
