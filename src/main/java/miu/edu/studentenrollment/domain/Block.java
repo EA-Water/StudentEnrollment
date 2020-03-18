@@ -1,15 +1,11 @@
 package miu.edu.studentenrollment.domain;
 
-import org.graalvm.compiler.lir.LIRInstruction;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.Future;
-import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.Pattern;
 import java.util.Date;
 
@@ -25,11 +21,10 @@ public class Block {
     private String blockName;
     private String blockSemester;
     private String blockSequenceNumber;
-    @FutureOrPresent
+
     @Temporal(TemporalType.DATE)
     private Date startDate;
 
-    @Future
     @Temporal(TemporalType.DATE)
     private Date endDate;
 
