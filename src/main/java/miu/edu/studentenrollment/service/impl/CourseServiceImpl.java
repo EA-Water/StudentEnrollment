@@ -20,7 +20,7 @@ public class CourseServiceImpl implements CourseService {
 	private CourseRepository courseRepo;
 
 	@Override
-	public Course saveCourse(@RequestBody Course course) {
+	public Course createCourse(@RequestBody Course course) {
 		return courseRepo.save(course);	
 	}
 
@@ -38,7 +38,7 @@ public class CourseServiceImpl implements CourseService {
 	}
 
 	@Override
-	public String deleteCourse(Course course) {
+	public String removeCourse(Course course) {
 		try {
 			courseRepo.delete(course);	
 		}catch(Exception e) {
@@ -48,7 +48,7 @@ public class CourseServiceImpl implements CourseService {
 	}
 
 	@Override
-	public Course getOneCourse(Long id) {
+	public Course getCourseById(Long id) {
 		return courseRepo.getOne(id);
 	}
 
