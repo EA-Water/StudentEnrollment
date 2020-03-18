@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.annotation.PostConstruct;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -33,15 +34,27 @@ public class StudentattendanceApplication {
 
 	@PostConstruct
 	public void initUsers(){
-		Role role = new Role("admin");
-		List<Role> roleList = Arrays.asList(role);
+		Role roleAdmin = new Role("ADMIN");
+		Role roleStudent = new Role("STUDENT");
+		Role roleFaculty = new Role("FACULTY");
 
-		User user = new User("admin","admin123","jeandelapaixd@gmail.com",roleList);
-		user.setPassword(bcryptEncoder.encode(user.getPassword()));
-		userRepo.save(user);
+		List<Role> adminOnly = Arrays.asList(roleAdmin);
+		List<Role> studentOnly = Arrays.asList(roleStudent);
+		List<Role> facultyOnly = Arrays.asList(roleFaculty);
 
+		User admin = new User("admin","admin123","jeandelapaixd@gmail.com",adminOnly);
+		admin.setPassword(bcryptEncoder.encode(admin.getPassword()));
+		userRepo.save(admin);
+
+		User faculty1 = new User("faculty","faculty123","faculty1@miu.edu",facultyOnly);
+		faculty1.setPassword(bcryptEncoder.encode(faculty1.getPassword()));
+
+
+		User student1 = new User("jean","jean123","jeandelapaixd@gmail.com",studentOnly);
+		student1.setPassword(bcryptEncoder.encode(student1.getPassword()));
+
+		userRepo.save(faculty1);
+		userRepo.save(student1);
 	}
-
-
 
 }

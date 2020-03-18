@@ -2,6 +2,7 @@ package miu.edu.studentenrollment.controller;
 
 import miu.edu.studentenrollment.domain.Block;
 import miu.edu.studentenrollment.service.BlockService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +19,7 @@ public class BlockController {
 	@Resource
 	private BlockService blockService;
 
+	@PreAuthorize("hasRole('ADMIN') or hasRole('FACULTY')")
 	@GetMapping(value = "/")
 	public List<Block> getAllBlock() {
 		return blockService.getAllBlock();
@@ -28,12 +30,14 @@ public class BlockController {
 		return blockService.getBlockById(Id);
 	}
 
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PostMapping(value = "/")
 	public List<Block> createBlock(@RequestBody Block block) {
 		blockService.createBlock(block);
 		return blockService.getAllBlock();
 	}
 
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PutMapping("/{id}")
 	public void updateBlock(@PathVariable Long id, @RequestBody Block block) {
 
