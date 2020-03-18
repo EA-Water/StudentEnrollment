@@ -10,7 +10,7 @@ import java.util.List;
 public interface EnrollmentService {
 
     Enrollment createEnrollment(Enrollment enrollment);
-    List<Enrollment> viewEnrollment();
+    List<Enrollment> getEnrollments();
     List<Enrollment> getEnrollmentByStudent(Student student);
     List<Enrollment> getEnrollmentBySection(Section section);
     boolean isEnrollmentExit(Enrollment Enrollment);

@@ -27,13 +27,13 @@ public class SectionServiceImpl implements SectionService {
     }
 
     @Override
-    public List<Section> viewAllSection() {
+    public List<Section> getAllSections() {
         return sectionRepo.findAll();
     }
 
 
     @Override
-    public Section editSection(Section section) throws Exception {
+    public Section updateSection(Section section) throws Exception {
 
         Section foundSection = sectionRepo.getOne(section.getId());
 
@@ -44,7 +44,7 @@ public class SectionServiceImpl implements SectionService {
     }
 
     @Override
-    public Section findOneSection(Long id) throws Exception {
+    public Section getSectionById(Long id) throws Exception {
         Section foundSection = sectionRepo.getOne(id);
 
         if(foundSection== null){

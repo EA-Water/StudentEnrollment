@@ -53,17 +53,17 @@ public class SectionServiceImplTest {
 	}
 	@Test
 	void testViewAllSection() throws Exception{
-		when(sectionService.viewAllSection()).thenReturn(sections);
-		assertEquals(1, sectionService.viewAllSection().size());
+		when(sectionService.getAllSections()).thenReturn(sections);
+		assertEquals(1, sectionService.getAllSections().size());
 	}
 	@Test
 	void testEditSection() throws Exception{
-		when(sectionService.editSection(section1)).thenReturn(section1);
-		assertEquals(section1, sectionService.editSection(section1));
+		when(sectionService.updateSection(section1)).thenReturn(section1);
+		assertEquals(section1, sectionService.updateSection(section1));
 	}
 	@Test
 	void testFindOneSection() throws Exception{
-		when(sectionService.findOneSection(1L)).thenReturn(section1);
-		assertEquals(section1, sectionService.findOneSection(1L));
+		when(sectionService.getSectionById(1L)).thenReturn(section1);
+		assertEquals(section1, sectionService.getSectionById(1L));
 	}
 }

@@ -1,7 +1,6 @@
 package miu.edu.studentenrollment.controller;
 
 import miu.edu.studentenrollment.domain.Enrollment;
-import miu.edu.studentenrollment.domain.Offering;
 import miu.edu.studentenrollment.service.EnrollmentService;
 import miu.edu.studentenrollment.util.CustomError;
 
@@ -14,40 +13,41 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@RequestMapping("/enrollments")
 public class EnrollmentController {
 
     @Autowired
     private EnrollmentService enrollmentService;
 
-    @PostMapping("/create/enrollment")
+    @PostMapping("/")
     public List<Enrollment> createEnrollment(@RequestBody Enrollment enrollment){
         List<Enrollment> enrollments= new ArrayList<>();
         try{
            Enrollment en = enrollmentService.createEnrollment(enrollment);
-           enrollments = enrollmentService.viewEnrollment();
+           enrollments = enrollmentService.getEnrollments();
         }catch (Exception ex){
             ex.printStackTrace();
         }
         return enrollments;
     }
 
-    @GetMapping("/view/enrollments")
+    @GetMapping("/")
     public List<Enrollment> viewEnrollment(){
-        return enrollmentService.viewEnrollment();
+        return enrollmentService.getEnrollments();
     }
 
-    @GetMapping("/view/studentenrollments/{studentId}")
+    @GetMapping("/{studentId}")
     public List<Enrollment> viewStudentEnrollment(@PathVariable Long studentId){
         return null;
     }
 
-    @GetMapping("/view/sectionenrollments/{sectionId}")
+    @GetMapping("/{sectionId}")
     public List<Enrollment> viewSectionEnrollment(@PathVariable Long sectionId){
         return null;
     }
     
     @SuppressWarnings({ "rawtypes", "unchecked" })
-	@PutMapping("/update/enrollment/{id}")
+	@PutMapping("/{id}")
     public ResponseEntity<?> updateEnrollment(@PathVariable("id") long id, @RequestBody Enrollment enrollment) {
     	Enrollment currentEnrollment = enrollmentService.getEnrollmentById(id);
         if (currentEnrollment == null) {
@@ -63,7 +63,7 @@ public class EnrollmentController {
     }
     
     @SuppressWarnings({ "unchecked", "rawtypes" })
-	@DeleteMapping("/enrollment/{id}")
+	@DeleteMapping("/{id}")
     public ResponseEntity<?> deleteEnrollment(@PathVariable("id") long id) {
  
     	Enrollment enrollment = enrollmentService.getEnrollmentById(id);

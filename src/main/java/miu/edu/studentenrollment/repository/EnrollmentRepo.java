@@ -15,7 +15,7 @@ public interface EnrollmentRepo extends JpaRepository<Enrollment, Long> {
 
     List<Enrollment> findByStudent(Student student);
     List<Enrollment> findBySection(Section section);
-    @Query("SELECT CASE WHEN COUNT(o) > 0 THEN true ELSE false END FROM Enrollment e WHERE e.student.id = :studentId AND e.section.id = :sectionId")
+    @Query("SELECT CASE WHEN COUNT(e) > 0 THEN true ELSE false END FROM Enrollment e WHERE e.student.id = :studentId AND e.section.id = :sectionId")
 	boolean existsByStudentAndSection(@Param("sectionId")Long sectionId, @Param("studentId")Long studentId);
 
 }

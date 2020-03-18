@@ -24,7 +24,7 @@ public class EnrollmentServiceImpl implements EnrollmentService {
     }
 
     @Override
-    public List<Enrollment> viewEnrollment() {
+    public List<Enrollment> getEnrollments() {
         return enrollmentRepo.findAll();
     }
 

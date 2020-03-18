@@ -9,14 +9,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@RequestMapping("/sections")
 public class SectionController {
 
     @Autowired
     private SectionService sectionService;
 
-    @PostMapping("/create/section")
+    @PostMapping("/")
     public List<Section> createSection(@RequestBody Section section){
-        List<Section> sectionList = sectionService.viewAllSection();
+        List<Section> sectionList = sectionService.getAllSections();
         try {
             sectionList.add(sectionService.createSection(section));
         }catch (Exception e){
@@ -26,24 +27,24 @@ public class SectionController {
     }
 
 
-    @PostMapping("/update/section/{id}")
+    @PostMapping("/{id}")
     public List<Section> updateSection(@RequestBody Section section, @PathVariable Long id){
 
 
         List<Section> sectionList = new ArrayList<>();
         try {
-            Section section1 = sectionService.findOneSection(id);
+            Section section1 = sectionService.getSectionById(id);
             section1 = section;
-            sectionService.editSection(section1);
-            sectionList=sectionService.viewAllSection();
+            sectionService.updateSection(section1);
+            sectionList=sectionService.getAllSections();
         }catch (Exception e){
             e.printStackTrace();
         }
         return  sectionList;
     }
 
-    @GetMapping("/view/sections")
+    @GetMapping("/")
     public List<Section> viewAll(){
-        return sectionService.viewAllSection();
+        return sectionService.getAllSections();
     }
 }

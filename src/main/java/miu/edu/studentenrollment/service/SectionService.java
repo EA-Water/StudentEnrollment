@@ -8,9 +8,9 @@ public interface SectionService {
 
     public Section createSection(Section section) throws Exception;
 
-    public List<Section> viewAllSection();
+    public List<Section> getAllSections();
 
-    public Section editSection(Section section) throws Exception;
+    public Section updateSection(Section section) throws Exception;
 
-    public Section findOneSection(Long id) throws Exception;
+    public Section getSectionById(Long id) throws Exception;
 }

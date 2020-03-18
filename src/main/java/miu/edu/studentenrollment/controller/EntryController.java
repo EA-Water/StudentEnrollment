@@ -16,12 +16,13 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
+@RequestMapping("/entries")
 public class EntryController {
 
     @Autowired
     private EntryService entryService;
 
-    @PostMapping("/create/entry")
+    @PostMapping("/")
     public ResponseEntity<?> createEntry(@RequestBody @Valid Entry entry, UriComponentsBuilder ucBuilder) throws Exception {
 
         if (entryService.exist(entry.getEntryName())) {
@@ -34,19 +35,19 @@ public class EntryController {
         return new ResponseEntity<String>(headers, HttpStatus.CREATED);
     }
 
-    @GetMapping("/view/entries")
+    @GetMapping("/")
     public List<Entry> getAllEntry(){
-        return entryService.viewEntries();
+        return entryService.getAllEntries();
     }
 
-    @PutMapping("/update/entry/{entryId}")
+    @PutMapping("/{entryId}")
     public List<Entry> updateEntry(@RequestBody Entry entry, @PathVariable Long entryId){
             List<Entry> entries = new ArrayList<>();
         try {
-            Entry entry1  = entryService.findEntry(entryId);
+            Entry entry1  = entryService.getEntry(entryId);
             entry.setId(entryId);
             entryService.updateEntry(entry);
-            entries = entryService.viewEntries();
+            entries = entryService.getAllEntries();
         } catch (Exception e) {
             e.printStackTrace();
         }

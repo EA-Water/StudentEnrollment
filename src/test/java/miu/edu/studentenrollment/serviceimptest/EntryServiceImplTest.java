@@ -81,8 +81,8 @@ class EntryServiceImplTest {
 
     @Test
     void testViewAllEntries() throws Exception {
-        when(entryService.viewEntries()).thenReturn(entryList);
-        assertEquals(1, entryService.viewEntries().size());
+        when(entryService.getAllEntries()).thenReturn(entryList);
+        assertEquals(1, entryService.getAllEntries().size());
 
         // Testing view All Employees Controller
 //			mockMvc.perform(get("/view/entries")
@@ -111,8 +111,8 @@ class EntryServiceImplTest {
     @Test
     void testFindEntry() {
         try {
-            when(entryService.findEntry(1L)).thenReturn(entry1);
-            assertEquals(entry1, entryService.findEntry(1L));
+            when(entryService.getEntry(1L)).thenReturn(entry1);
+            assertEquals(entry1, entryService.getEntry(1L));
         } catch (Exception e) {
 
         }

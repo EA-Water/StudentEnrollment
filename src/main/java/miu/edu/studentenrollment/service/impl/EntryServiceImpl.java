@@ -36,7 +36,7 @@ public class EntryServiceImpl implements EntryService {
     }
 
     @Override
-    public Entry findEntry(Long id) throws Exception {
+    public Entry getEntry(Long id) throws Exception {
         try {
             return entryRepo.findById(id).get();
         }catch (Exception e){
@@ -47,7 +47,7 @@ public class EntryServiceImpl implements EntryService {
     @Override
     public Entry updateEntry(Entry entry) throws Exception {
         try {
-            Entry foundEntry = this.findEntry(entry.getId());
+            Entry foundEntry = this.getEntry(entry.getId());
             if(foundEntry==null){
                 throw new Exception("Invalid entry");
             }
@@ -58,7 +58,7 @@ public class EntryServiceImpl implements EntryService {
     }
 
     @Override
-    public List<Entry> viewEntries() {
+    public List<Entry> getAllEntries() {
         return (List<Entry>) entryRepo.findAll();
     }
 
