@@ -45,9 +45,13 @@ public class EntryServiceImpl implements EntryService {
     }
 
     @Override
-    public Entry updateEntry(Entry entry) throws Exception {
+    public Entry updateEntry(Entry entry, Long id) throws Exception {
         try {
-            Entry foundEntry = this.getEntry(entry.getId());
+            Entry foundEntry = entryRepo.findById(id).get();
+            foundEntry.setEntryStartDate(entry.getEntryStartDate());
+            foundEntry.setEntryName(entry.getEntryName());
+            foundEntry.setEnrollmentEndDate(entry.getEnrollmentEndDate());
+            foundEntry.setEnrollmentStartDate(entry.getEnrollmentStartDate());
             if(foundEntry==null){
                 throw new Exception("Invalid entry");
             }

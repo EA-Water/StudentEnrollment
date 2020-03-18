@@ -58,7 +58,7 @@ public class EnrollmentServiceImplTest {
 	{
 		try {
 			when(enrollmentRepository.findAll()).thenReturn(enrollments);
-			assertEquals(2, enrollmentService.getEnrollments().size());
+			assertEquals(2, enrollmentService.getAllEnrollments().size());
 		}catch (Exception e) {
             e.printStackTrace();
         }

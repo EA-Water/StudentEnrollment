@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -20,20 +19,23 @@ public class EnrollmentController {
     private EnrollmentService enrollmentService;
 
     @PostMapping("/")
-    public List<Enrollment> createEnrollment(@RequestBody Enrollment enrollment){
-        List<Enrollment> enrollments= new ArrayList<>();
+    public ResponseEntity<?>createEnrollment(@RequestBody Enrollment enrollment){
         try{
-           Enrollment en = enrollmentService.createEnrollment(enrollment);
-           enrollments = enrollmentService.getEnrollments();
+           Enrollment savedEnrollment = enrollmentService.createEnrollment(enrollment);
+           return new ResponseEntity<Enrollment>(savedEnrollment,HttpStatus.CREATED);
         }catch (Exception ex){
-            ex.printStackTrace();
+            return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
         }
-        return enrollments;
     }
 
     @GetMapping("/")
-    public List<Enrollment> viewEnrollment(){
-        return enrollmentService.getEnrollments();
+    public ResponseEntity<?> viewEnrollment(){
+
+        List<Enrollment> enrollments = enrollmentService.getAllEnrollments();
+        if (enrollments.isEmpty()){
+            return new ResponseEntity<List<Enrollment>>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<List<Enrollment>>(enrollments, HttpStatus.OK);
     }
 
     @GetMapping("/{studentId}")
@@ -41,10 +43,6 @@ public class EnrollmentController {
         return null;
     }
 
-    @GetMapping("/{sectionId}")
-    public List<Enrollment> viewSectionEnrollment(@PathVariable Long sectionId){
-        return null;
-    }
     
     @SuppressWarnings({ "rawtypes", "unchecked" })
 	@PutMapping("/{id}")
@@ -54,10 +52,8 @@ public class EnrollmentController {
             return new ResponseEntity(new CustomError("Unable to upate. Enrollment with id " + id + " not found."),
                     HttpStatus.NOT_FOUND);
         }
- 
         currentEnrollment.setSection(enrollment.getSection());
         currentEnrollment.setStudent(enrollment.getStudent());
- 
         enrollmentService.createEnrollment(currentEnrollment);
         return new ResponseEntity<Enrollment>(currentEnrollment, HttpStatus.OK);
     }

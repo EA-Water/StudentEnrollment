@@ -8,6 +8,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriBuilder;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
@@ -31,32 +32,39 @@ public class EntryController {
         Entry savedEntry = entryService.createEntry(entry);
 
         HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/view/entries").build().toUri());
+        headers.setLocation(ucBuilder.path("/entries/").build().toUri());
         return new ResponseEntity<String>(headers, HttpStatus.CREATED);
     }
 
     @GetMapping("/")
-    public List<Entry> getAllEntry(){
-        return entryService.getAllEntries();
+    public ResponseEntity<?> getAllEntry() {
+        List<Entry> entries = entryService.getAllEntries();
+
+        if (entries.isEmpty()) {
+            return new ResponseEntity<List<Entry>>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<List<Entry>>(entries, HttpStatus.OK);
     }
 
-    @PutMapping("/{entryId}")
-    public List<Entry> updateEntry(@RequestBody Entry entry, @PathVariable Long entryId){
-            List<Entry> entries = new ArrayList<>();
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateEntry(@RequestBody @Valid Entry entry, @PathVariable Long id, UriComponentsBuilder uriComponentsBuilder) {
+        HttpHeaders headers = new HttpHeaders();
         try {
-            Entry entry1  = entryService.getEntry(entryId);
-            entry.setId(entryId);
-            entryService.updateEntry(entry);
-            entries = entryService.getAllEntries();
+            Entry entry1 = entryService.getEntry(id);
+            if (entry1 == null) {
+                return new ResponseEntity(new CustomError("Invalid entry id"), HttpStatus.NOT_FOUND);
+            }
+
+            Entry updatedEntry = entryService.updateEntry(entry, id);
+            headers.setLocation(uriComponentsBuilder.path("/entries/").build().toUri());
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        return entries;
+        return new ResponseEntity<String>(headers, HttpStatus.OK);
     }
 
     @GetMapping("/hello")
-    public String hello(){
+    public String hello() {
         return "Hello there";
     }
 }

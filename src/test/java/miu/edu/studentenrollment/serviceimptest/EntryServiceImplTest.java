@@ -94,8 +94,8 @@ class EntryServiceImplTest {
     @Test
     void testUpdateEntry() {
         try {
-            when(entryService.updateEntry(entry1)).thenReturn(entry1);
-            assertEquals(entry1, entryService.updateEntry(entry1));
+            when(entryService.updateEntry(entry1, entry1.getId())).thenReturn(entry1);
+            assertEquals(entry1, entryService.updateEntry(entry1, entry1.getId()));
         } catch (Exception e) {
 
         }
