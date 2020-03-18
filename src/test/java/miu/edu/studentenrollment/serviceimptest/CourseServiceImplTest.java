@@ -44,8 +44,8 @@ public class CourseServiceImplTest {
 	@Test
 	void testSaveCourse() {
 		try {
-			when(courseService.saveCourse(course1)).thenReturn(course1);
-			assertEquals(course1, courseService.saveCourse(course1));
+			when(courseService.createCourse(course1)).thenReturn(course1);
+			assertEquals(course1, courseService.createCourse(course1));
 			
 		}catch (Exception e) {
             e.printStackTrace();
@@ -53,8 +53,8 @@ public class CourseServiceImplTest {
 	}
 	@Test
 	void testCourses() throws Exception  {
-		when(courseService.courses()).thenReturn(courses);
-		assertEquals(1, courseService.courses().size());
+		when(courseService.getAllCourses()).thenReturn(courses);
+		assertEquals(1, courseService.getAllCourses().size());
 		
 	}
 	@Test

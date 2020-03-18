@@ -18,7 +18,7 @@ import miu.edu.studentenrollment.service.FacultyService;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/faculty")
+@RequestMapping("/faculties")
 public class FacultyController {
 
 	@Autowired

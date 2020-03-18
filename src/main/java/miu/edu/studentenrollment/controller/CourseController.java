@@ -27,13 +27,13 @@ public class CourseController {
 	@PostMapping("/")
 	public List<Course> createCourse(@RequestBody Course course) {
 		courseService.createCourse(course);
-		List<Course> courses = courseService.courses();
+		List<Course> courses = courseService.getAllCourses();
 		return courses;
 	}
 
 	@GetMapping("/")
 	public List<Course> getAllCourses() {
-		return courseService.courses();
+		return courseService.getAllCourses();
 	}
 
 	@PutMapping("/{id}")
