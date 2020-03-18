@@ -28,13 +28,13 @@ public class Student {
     @JsonIgnore
     private List<Enrollment> enrollment;
 
-    @JsonIgnore
+//    @JsonIgnore
     @Valid
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="mailing_address_id")
     private Address mailingAddress;
 
-    @JsonIgnore
+//    @JsonIgnore
     @Valid
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="home_address_id")
@@ -44,7 +44,7 @@ public class Student {
     @Valid
     @ManyToOne
     @JoinColumn(name ="entry_id")
-    @JsonIgnore
+  // @JsonIgnore
     private Entry entry;
 
 

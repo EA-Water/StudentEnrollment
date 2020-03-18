@@ -4,6 +4,8 @@ import miu.edu.studentenrollment.domain.Student;
 import miu.edu.studentenrollment.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -13,7 +15,7 @@ public class StudentController {
     private StudentService studentService;
 
     @PostMapping("/create/student")
-    public Student addStudent(@RequestBody Student student)  {
+    public Student addStudent(@RequestBody @Valid Student student)  {
         return studentService.addStudent(student);
     }
 

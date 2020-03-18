@@ -29,11 +29,11 @@ public class StudentServiceImpl implements StudentService {
     private AddressRepo addressRepo;
 
     public Student addStudent(Student student) {
-        try {
-            Entry entry = entryService.findEntry(student.getIdSaving());
-            student.setEntry(entry);
-        } catch (Exception e) {
-        }
+//        try {
+//            Entry entry = entryService.findEntry(student.getIdSaving());
+//            student.setEntry(entry);
+//        } catch (Exception e) {
+//        }
         if (addressRepo.findAll().size() != 0) {
             if (this.addressExists(student.getHomeAddress().getCountry(), student.getHomeAddress().getCity(), student.getHomeAddress().getStreet(), student.getHomeAddress().getPostalCode())) {
                 student.setHomeAddress(addressService.findAddress(student.getHomeAddress().getCountry(), student.getHomeAddress().getCity(), student.getHomeAddress().getStreet(), student.getHomeAddress().getPostalCode()).get(0));
