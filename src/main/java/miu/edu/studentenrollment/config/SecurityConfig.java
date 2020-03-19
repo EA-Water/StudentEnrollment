@@ -62,12 +62,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.cors().disable();
-        http.csrf().disable().authorizeRequests().antMatchers("/authenticate")
-                .permitAll().antMatchers(HttpMethod.OPTIONS, "/**")
-                .permitAll()
-                .antMatchers("/*/*").hasRole("ADMIN")
-                .antMatchers(HttpMethod.GET,"/blocks/").hasAnyRole("ADMIN","FACULTY")
-                .antMatchers(HttpMethod.GET,"/courses/").hasAnyRole("ADMIN","FACULTY")
+        http.csrf().disable().authorizeRequests()
+                .antMatchers("/authenticate").permitAll()
+                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                .antMatchers(HttpMethod.POST,"/*/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.PUT,"/*/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET,"/blocks/").hasAnyRole("FACULTY","ADMIN")
+                .antMatchers(HttpMethod.GET,"/courses/").hasAnyRole("FACULTY","ADMIN")
                 .antMatchers("/students/{studentID}/*").hasAnyRole("STUDENT","ADMIN")
                 .anyRequest().authenticated()
                 .and().exceptionHandling().and().sessionManagement()

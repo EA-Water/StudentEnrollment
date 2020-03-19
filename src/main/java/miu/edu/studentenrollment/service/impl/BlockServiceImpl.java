@@ -5,6 +5,7 @@ import miu.edu.studentenrollment.repository.BlockRepo;
 import miu.edu.studentenrollment.service.BlockService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,11 +19,13 @@ public class BlockServiceImpl implements BlockService {
 	@Autowired
 	private BlockRepo repo;
 
+	@PreAuthorize("hasRole('ADMIN') or hasRole('FACULTY')")
 	@Override
-	public List<Block> getAllBlock() {
+	public List<Block> getAllBlocks() {
 		return (List<Block>) repo.findAll();
 	}
 
+	@PreAuthorize("hasRole('ADMIN')")
 	@Override
 	public Block getBlockById(Long theId) {
 		Optional<Block> result = repo.findById(theId);
@@ -35,11 +38,13 @@ public class BlockServiceImpl implements BlockService {
 		return block;
 	}
 
+	@PreAuthorize("hasRole('ADMIN')")
 	@Override
 	public Block createBlock(Block block) {
 			return repo.save(block);
 	}
 
+	@PreAuthorize("hasRole('ADMIN')")
 	@Override
 	public Block updateBlock(Block block) throws Exception {
 		if (repo.findById(block.getId()).get() == null) {
