@@ -67,6 +67,28 @@ public class OfferingServiceImpl implements OfferingService{
 		// TODO Auto-generated method stub
 		offeringRepository.deleteAll();
 	}
-	 
 
+	@Override
+	public List<Offering> getOfferingsByBlockIdOrCourseId(long id) {
+		// TODO Auto-generated method stub
+		return offeringRepository.findByBlock_id_OrCourse_id(id, id);
+	}
+
+	@Override
+	public List<Offering> getOfferingsByBlockCodeOrCourseCode(String blockCode) {
+		// TODO Auto-generated method stub
+		return offeringRepository.findByBlock_BlockCode_OrCourse_CourseCode(blockCode, blockCode);
+	}
+
+	@Override
+	public List<Offering> getOfferingsByBlockId(long id) {
+		// TODO Auto-generated method stub
+		return offeringRepository.findByBlock_id(id);
+	}
+
+	@Override
+	public List<Offering> getOfferingsByCourseId(long id) {
+		// TODO Auto-generated method stub
+		return offeringRepository.findByCourse_id(id);
+	}
 }

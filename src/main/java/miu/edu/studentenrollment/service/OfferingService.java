@@ -11,6 +11,14 @@ public interface OfferingService {
     Offering getOfferingById(long id);
 
     List<Offering> getAllOffering();
+    
+    List<Offering> getOfferingsByBlockId(long id);
+    
+    List<Offering> getOfferingsByBlockIdOrCourseId(long id);
+    
+    List<Offering> getOfferingsByBlockCodeOrCourseCode(String blockCode);
+
+    List<Offering> getOfferingsByCourseId(long id);
 
     void createOffering(Offering offering);
     

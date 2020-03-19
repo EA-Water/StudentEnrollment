@@ -2,10 +2,14 @@ package miu.edu.studentenrollment.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,7 +43,13 @@ public class OfferingController {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@GetMapping("/{searchString}")
     public ResponseEntity<?> getOffering(@PathVariable("searchString") String searchString) {
-    	 List<Offering> offerings = offeringService.searchOfferings(searchString);
+		List<Offering> offerings = null;
+		if(StringUtils.isNumeric(searchString))
+    	 {
+			offerings = offeringService.getOfferingsByBlockIdOrCourseId(Long.parseLong(searchString));
+    	 }
+		else {offerings = offeringService.getOfferingsByBlockCodeOrCourseCode(searchString);}
+    	 
         if (offerings.isEmpty()) {
             return new ResponseEntity(new CustomError("No offering with " + searchString 
                     + " found"), HttpStatus.NOT_FOUND);
@@ -49,23 +59,25 @@ public class OfferingController {
 	
     @SuppressWarnings({ "unchecked", "rawtypes" })
 	@PostMapping("/")
-    public ResponseEntity<?> createOffering(@RequestBody Offering offering, UriComponentsBuilder ucBuilder) {
- 
+    public ResponseEntity<?> createOffering(@RequestBody @Valid Offering offering, BindingResult bindingResult, UriComponentsBuilder ucBuilder) {
+    	if(!bindingResult.hasErrors())
+		{
         if (offeringService.isOfferingExit(offering)) {
         	System.out.println(offeringService.isOfferingExit(offering));
             return new ResponseEntity(new CustomError("Unable to create. An Offerng with Offering Code " + 
             offering.getOfferingCode() + " already exist."),HttpStatus.CONFLICT);
         }
         offeringService.createOffering(offering);
- 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/offerings/").build().toUri());
-        return new ResponseEntity<String>(headers, HttpStatus.CREATED);
+        return new ResponseEntity<Offering>(offering, HttpStatus.CREATED);
+		}
+    	return new ResponseEntity(new CustomError("Unable to create. Error in your data"),HttpStatus.NOT_ACCEPTABLE);
     }
  
     @SuppressWarnings({ "rawtypes", "unchecked" })
 	@PutMapping("/{id}")
-    public ResponseEntity<?> updateOffering(@PathVariable("id") long id, @RequestBody Offering offering) {
+    public ResponseEntity<?> updateOffering(@PathVariable("id") long id, @RequestBody @Valid Offering offering, BindingResult bindingResult) {
+    	if(!bindingResult.hasErrors())
+		{
     	Offering currentOffering = offeringService.getOfferingById(id);
  
         if (currentOffering == null) {
@@ -79,6 +91,8 @@ public class OfferingController {
  
         offeringService.updateOffering(currentOffering);
         return new ResponseEntity<Offering>(currentOffering, HttpStatus.OK);
+		}
+    	return new ResponseEntity(new CustomError("Unable to create. Error in your data"),HttpStatus.NOT_ACCEPTABLE);
     }
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
