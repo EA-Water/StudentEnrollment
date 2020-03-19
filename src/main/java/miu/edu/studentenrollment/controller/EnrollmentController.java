@@ -19,50 +19,49 @@ public class EnrollmentController {
     private EnrollmentService enrollmentService;
 
     @PostMapping("/")
-    public ResponseEntity<?>createEnrollment(@RequestBody Enrollment enrollment){
-        try{
-           Enrollment savedEnrollment = enrollmentService.createEnrollment(enrollment);
-           return new ResponseEntity<Enrollment>(savedEnrollment,HttpStatus.CREATED);
-        }catch (Exception ex){
+    public ResponseEntity<?> createEnrollment(@RequestBody Enrollment enrollment) {
+        try {
+            Enrollment savedEnrollment = enrollmentService.createEnrollment(enrollment);
+            return new ResponseEntity<Enrollment>(savedEnrollment, HttpStatus.CREATED);
+        } catch (Exception ex) {
             return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 
     @GetMapping("/")
-    public ResponseEntity<?> viewEnrollment(){
+    public ResponseEntity<?> getEnrollments() {
 
         List<Enrollment> enrollments = enrollmentService.getAllEnrollments();
-        if (enrollments.isEmpty()){
+        if (enrollments.isEmpty()) {
             return new ResponseEntity<List<Enrollment>>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<List<Enrollment>>(enrollments, HttpStatus.OK);
     }
 
-    @GetMapping("/{studentId}")
-    public List<Enrollment> viewStudentEnrollment(@PathVariable Long studentId){
-        return null;
+
+    @SuppressWarnings({"rawtypes", "unchecked"})
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateEnrollment(@PathVariable("id") long id, @RequestBody Enrollment enrollment) {
+        try {
+            Enrollment currentEnrollment = enrollmentService.getEnrollmentById(id);
+            if (currentEnrollment == null) {
+                return new ResponseEntity(new CustomError("Unable to upate. Enrollment with id " + id + " not found."),
+                        HttpStatus.NOT_FOUND);
+            }
+            currentEnrollment.setSection(enrollment.getSection());
+            currentEnrollment.setStudent(enrollment.getStudent());
+            enrollmentService.createEnrollment(currentEnrollment);
+            return new ResponseEntity<Enrollment>(currentEnrollment, HttpStatus.OK);
+        } catch (Exception ex) {
+            return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 
-    
-    @SuppressWarnings({ "rawtypes", "unchecked" })
-	@PutMapping("/{id}")
-    public ResponseEntity<?> updateEnrollment(@PathVariable("id") long id, @RequestBody Enrollment enrollment) {
-    	Enrollment currentEnrollment = enrollmentService.getEnrollmentById(id);
-        if (currentEnrollment == null) {
-            return new ResponseEntity(new CustomError("Unable to upate. Enrollment with id " + id + " not found."),
-                    HttpStatus.NOT_FOUND);
-        }
-        currentEnrollment.setSection(enrollment.getSection());
-        currentEnrollment.setStudent(enrollment.getStudent());
-        enrollmentService.createEnrollment(currentEnrollment);
-        return new ResponseEntity<Enrollment>(currentEnrollment, HttpStatus.OK);
-    }
-    
-    @SuppressWarnings({ "unchecked", "rawtypes" })
-	@DeleteMapping("/{id}")
+    @SuppressWarnings({"unchecked", "rawtypes"})
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteEnrollment(@PathVariable("id") long id) {
- 
-    	Enrollment enrollment = enrollmentService.getEnrollmentById(id);
+
+        Enrollment enrollment = enrollmentService.getEnrollmentById(id);
         if (enrollment == null) {
             return new ResponseEntity(new CustomError("Unable to delete. Enrollment with id " + id + " not found."),
                     HttpStatus.NOT_FOUND);

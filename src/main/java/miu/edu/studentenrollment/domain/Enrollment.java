@@ -12,12 +12,12 @@ public class Enrollment {
     private Long id;
 
     @Valid
-    @ManyToOne(cascade= CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="student_id")
     private Student student;
 
     @Valid
-    @ManyToOne(cascade= CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="section_id")
     private Section section;
 

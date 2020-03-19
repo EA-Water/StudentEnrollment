@@ -19,7 +19,11 @@ public class EnrollmentServiceImpl implements EnrollmentService {
     private EnrollmentRepo enrollmentRepo;
 
     @Override
-    public Enrollment createEnrollment(Enrollment enrollment) {
+    public Enrollment createEnrollment(Enrollment enrollment) throws Exception {
+        List<Enrollment> enrollments = enrollmentRepo.findByStudent(enrollment.getStudent());
+        if(enrollments.size()>=4){
+            throw new Exception("You have already enrolled 4 times");
+        }
         return enrollmentRepo.save(enrollment);
     }
 

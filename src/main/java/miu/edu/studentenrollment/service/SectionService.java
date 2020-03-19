@@ -14,4 +14,5 @@ public interface SectionService {
 
     public Section getSectionById(Long id) throws Exception;
 
+    public List<Section> getSectionByBlockId(Long id);
 }

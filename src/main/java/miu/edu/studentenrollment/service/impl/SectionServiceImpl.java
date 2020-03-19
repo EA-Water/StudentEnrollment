@@ -54,4 +54,10 @@ public class SectionServiceImpl implements SectionService {
         }
         return foundSection;
     }
+
+    @PreAuthorize("hasRole('ADMIN') or hasRole('FACULTY')")
+    @Override
+    public List<Section> getSectionByBlockId(Long id) {
+        return sectionRepo.getSectionsByBlockId(id);
+    }
 }

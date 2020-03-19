@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface EnrollmentService {
 
-    Enrollment createEnrollment(Enrollment enrollment);
+    Enrollment createEnrollment(Enrollment enrollment) throws Exception;
     List<Enrollment> getAllEnrollments();
     List<Enrollment> getEnrollmentByStudent(Student student);
     List<Enrollment> getEnrollmentBySection(Section section);

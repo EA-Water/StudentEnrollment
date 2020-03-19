@@ -1,8 +1,10 @@
 package miu.edu.studentenrollment.controller;
 
+import miu.edu.studentenrollment.domain.Block;
 import miu.edu.studentenrollment.domain.Enrollment;
 import miu.edu.studentenrollment.domain.Section;
 
+import miu.edu.studentenrollment.service.BlockService;
 import miu.edu.studentenrollment.service.EnrollmentService;
 import miu.edu.studentenrollment.service.SectionService;
 import miu.edu.studentenrollment.util.CustomError;
@@ -27,13 +29,16 @@ public class SectionController {
     @Autowired
     private EnrollmentService enrollmentService;
 
+    @Autowired
+    private BlockService blockService;
+
     @PostMapping("/")
     public ResponseEntity<?> createSection(@RequestBody @Valid Section section, UriComponentsBuilder uriComponentsBuilder) {
         HttpHeaders headers = new HttpHeaders();
         try {
             Section Savedsection = sectionService.createSection(section);
             headers.setLocation(uriComponentsBuilder.path("/sections/").build().toUri());
-            return new ResponseEntity<String>(headers, HttpStatus.CREATED);
+            return new ResponseEntity<String>("Action is done Successfully", HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
@@ -78,6 +83,21 @@ public class SectionController {
             }
             List<Enrollment> sectionEnrollments = enrollmentService.getEnrollmentBySection(section);
             return new ResponseEntity<List<Enrollment>>(sectionEnrollments,HttpStatus.OK);
+
+        }catch (Exception ex){
+            return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/{blockId}/blocks")
+    public ResponseEntity<?> viewSectionByBlockId(@PathVariable Long blockId){
+        try {
+            Block block = blockService.getBlockById(blockId);
+            if(block==null){
+                return new ResponseEntity(new CustomError("Block not found"), HttpStatus.NOT_FOUND);
+            }
+            List<Section> list = sectionService.getSectionByBlockId(blockId);
+            return new ResponseEntity<List<Section>>(list,HttpStatus.OK);
 
         }catch (Exception ex){
             return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
