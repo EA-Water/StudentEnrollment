@@ -8,6 +8,8 @@ import miu.edu.studentenrollment.service.impl.BlockServiceImpl;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.text.SimpleDateFormat;
@@ -32,13 +34,13 @@ import java.util.Date;
 class BlockServiceImplTest {
 
     @InjectMocks
-    BlockController blockController;
+    BlockServiceImpl blockService;
 
     MockMvc mockMvc;
     BlockService service = mock(BlockService.class);
 
     @Mock
-    BlockServiceImpl blockService;
+    BlockRepo blockRepo;
 
     Block block1 = new Block();
     Block block2 = new Block();
@@ -46,9 +48,8 @@ class BlockServiceImplTest {
 
     @BeforeEach
     void setUp() throws Exception {
-        MockitoAnnotations.initMocks(this);
-        mockMvc = MockMvcBuilders.standaloneSetup(blockController).build();
-        block1.setId((long) 1);
+    	MockitoAnnotations.initMocks(this);
+        block1.setId(1L);
         block1.setBlockCode("2020-03");
         block1.setBlockSemester("Fall");
         block1.setBlockSequenceNumber("23");
@@ -60,7 +61,7 @@ class BlockServiceImplTest {
         block1.setStartDate(startDate);
         block1.setEndDate(endDate);
 
-        block2.setId((long) 2);
+        block2.setId(2L);
         block2.setBlockCode("2020-02");
         block2.setBlockSemester("Fall");
         block2.setBlockSequenceNumber("2");
@@ -77,45 +78,46 @@ class BlockServiceImplTest {
 
     @Test
     void testCreateBlock() {
-        try {
-            when(blockService.createBlock(block1)).thenReturn(block1);
-            assertEquals(block1, blockService.createBlock(block1));
-        } catch (Exception e) {
+    	try {
+			blockService.createBlock(block1);
+			verify(blockRepo, times(1)).save(block1);
+			
+		}catch (Exception e) {
             e.printStackTrace();
-        }
+		}
 
     }
 
     @Test
     void testBlockListSize() throws Exception {
-        when(blockService.getAllBlock()).thenReturn(blockList);
-        assertEquals(2, blockService.getAllBlock().size());
+    	when(blockRepo.findAll()).thenReturn(blockList);
+		assertEquals(2, blockService.getAllBlock().size());
     }
 
     @Test
     void testViewAllBlocks() throws Exception {
-        when(blockService.getAllBlock()).thenReturn(blockList);
+        when(blockRepo.findAll()).thenReturn(blockList);
         assertEquals(blockList, blockService.getAllBlock());
     }
 
     @Test
     void testUpdateblock() {
-        try {
-            when(blockService.updateBlock(block1)).thenReturn(block1);
-            assertEquals(block1, blockService.updateBlock(block1));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    	try {
+			blockService.updateBlock(block2);
+			verify(blockRepo, times(1)).save(block2);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
     }
 
     @Test
     void testFindById() {
-        try {
-            when(blockService.getBlockById((long) 1)).thenReturn(block1);
-            assertEquals(block1, blockService.getBlockById((long) 1));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    	try {
+			when(blockRepo.findById(2L).get()).thenReturn(block2);
+			assertEquals(block1, blockService.getBlockById(2L));
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
     }
 
 
