@@ -5,16 +5,12 @@ import java.util.List;
 import miu.edu.studentenrollment.domain.Offering;
 
 public interface OfferingService {
-	
-	List<Offering> searchOfferings(String searchString);
 
     Offering getOfferingById(long id);
 
     List<Offering> getAllOffering();
     
     List<Offering> getOfferingsByBlockId(long id);
-    
-    List<Offering> getOfferingsByBlockIdOrCourseId(long id);
     
     List<Offering> getOfferingsByBlockCodeOrCourseCode(String blockCode);
 

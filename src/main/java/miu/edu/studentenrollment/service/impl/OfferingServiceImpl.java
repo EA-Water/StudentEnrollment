@@ -21,12 +21,6 @@ public class OfferingServiceImpl implements OfferingService{
 	OfferingRepository offeringRepository;
 	
 	@Override
-	public List<Offering> searchOfferings(String searchString) {
-		// TODO Auto-generated method stub
-		return offeringRepository.findOfferings(searchString);
-	}
-
-	@Override
 	public Offering getOfferingById(long id) {
 		// TODO Auto-generated method stub
 		return offeringRepository.findById(id);
@@ -69,18 +63,6 @@ public class OfferingServiceImpl implements OfferingService{
 	}
 
 	@Override
-	public List<Offering> getOfferingsByBlockIdOrCourseId(long id) {
-		// TODO Auto-generated method stub
-		return offeringRepository.findByBlock_id_OrCourse_id(id, id);
-	}
-
-	@Override
-	public List<Offering> getOfferingsByBlockCodeOrCourseCode(String blockCode) {
-		// TODO Auto-generated method stub
-		return offeringRepository.findByBlock_BlockCode_OrCourse_CourseCode(blockCode, blockCode);
-	}
-
-	@Override
 	public List<Offering> getOfferingsByBlockId(long id) {
 		// TODO Auto-generated method stub
 		return offeringRepository.findByBlock_id(id);
@@ -90,5 +72,11 @@ public class OfferingServiceImpl implements OfferingService{
 	public List<Offering> getOfferingsByCourseId(long id) {
 		// TODO Auto-generated method stub
 		return offeringRepository.findByCourse_id(id);
+	}
+
+	@Override
+	public List<Offering> getOfferingsByBlockCodeOrCourseCode(String code) {
+		// TODO Auto-generated method stub
+		return offeringRepository.findByBlock_BlockCode_OrCourse_CourseCode(code, code);
 	}
 }

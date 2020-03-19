@@ -16,12 +16,8 @@ public interface OfferingRepository extends JpaRepository<Offering, Long>{
 	
 	@Query("SELECT CASE WHEN COUNT(o) > 0 THEN true ELSE false END FROM Offering o WHERE o.offeringCode = :offeringword")
     boolean existsByOfferingCode(@Param("offeringword") String offeringword);
-   
-    @Query("SELECT o FROM Offering o WHERE (o.offeringCode LIKE %:searchvalue%)")
-    List<Offering> findOfferings(@Param("searchvalue") String searchvalue);
 
     List<Offering> findByBlock_BlockCode_OrCourse_CourseCode(String searchvalue, String searchvalue2);
-    List<Offering> findByBlock_id_OrCourse_id(Long id, Long id2);
     List<Offering> findByBlock_id(Long id);
     List<Offering> findByCourse_id(Long id);
     

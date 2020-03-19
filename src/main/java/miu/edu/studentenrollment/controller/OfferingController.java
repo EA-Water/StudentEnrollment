@@ -1,5 +1,6 @@
 package miu.edu.studentenrollment.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -40,21 +41,19 @@ public class OfferingController {
         return new ResponseEntity<List<Offering>>(offerings, HttpStatus.OK);
     }
  
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@GetMapping("/{searchString}")
-    public ResponseEntity<?> getOffering(@PathVariable("searchString") String searchString) {
-		List<Offering> offerings = null;
-		if(StringUtils.isNumeric(searchString))
-    	 {
-			offerings = offeringService.getOfferingsByBlockIdOrCourseId(Long.parseLong(searchString));
-    	 }
-		else {offerings = offeringService.getOfferingsByBlockCodeOrCourseCode(searchString);}
-    	 
-        if (offerings.isEmpty()) {
-            return new ResponseEntity(new CustomError("No offering with " + searchString 
-                    + " found"), HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<List<Offering>>(offerings, HttpStatus.OK);
+    public ResponseEntity<?> getOfferingByCode(@PathVariable("searchString") String searchString) {
+        return getOffering(searchString, "code");
+    }
+	
+	@GetMapping("/block/{searchString}")
+    public ResponseEntity<?> getOfferingByBlock(@PathVariable("searchString") String searchString) {
+        return getOffering(searchString, "block");
+    }
+	
+	@GetMapping("/course/{searchString}")
+    public ResponseEntity<?> getOfferingByCourse(@PathVariable("searchString") String searchString) {
+        return getOffering(searchString, "course");
     }
 	
     @SuppressWarnings({ "unchecked", "rawtypes" })
@@ -112,6 +111,25 @@ public class OfferingController {
     public ResponseEntity<Offering> removeAllOfferings() { 
     	offeringService.removeAllOfferings();
         return new ResponseEntity<Offering>(HttpStatus.NO_CONTENT);
+    }
+    
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	public ResponseEntity<?> getOffering(String searchString, String type) {
+		List<Offering> offerings = new ArrayList<Offering>();
+		if(StringUtils.isNumeric(searchString))
+    	 {
+			if(type.equals("block"))
+			offerings = offeringService.getOfferingsByBlockId(Long.parseLong(searchString));
+			else if(type.equals("course"))
+			offerings = offeringService.getOfferingsByCourseId(Long.parseLong(searchString));
+    	 }
+		else {offerings = offeringService.getOfferingsByBlockCodeOrCourseCode(searchString);}
+    	 
+        if (offerings.isEmpty()) {
+            return new ResponseEntity(new CustomError("No offering with " + searchString 
+                    + " found"), HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<List<Offering>>(offerings, HttpStatus.OK);
     }
 
 }

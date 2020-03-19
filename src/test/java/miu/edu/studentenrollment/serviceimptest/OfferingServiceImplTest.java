@@ -9,6 +9,7 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.assertj.core.util.Arrays;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -44,19 +45,6 @@ public class OfferingServiceImplTest {
 		offerings.add(offering2);
 	}
 	
-	@Test
-	void searchOfferingTest()
-	{
-		String Searchtxt = "cs";
-		try {
-			when(offeringRepository.findOfferings(Searchtxt)).thenReturn(offerings);
-			List<Offering> result = offeringService.searchOfferings(Searchtxt);
-			assertEquals(2, result.size());
-			assertEquals("cs544-2020-03", result.get(0).getOfferingCode());
-		}catch (Exception e) {
-            e.printStackTrace();
-        }
-	}
 	
 	@Test
 	void getOfferingByIdTest()
