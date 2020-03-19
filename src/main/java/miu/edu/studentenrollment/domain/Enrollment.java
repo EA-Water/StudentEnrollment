@@ -1,5 +1,6 @@
 package miu.edu.studentenrollment.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.engine.internal.Cascade;
 
@@ -13,16 +14,15 @@ public class Enrollment {
     @GeneratedValue
     private Long id;
 
-    @JsonIgnore
     @Valid
     @ManyToOne(cascade= CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name="student_id")
     private Student student;
 
-    @JsonIgnore
     @Valid
     @ManyToOne(cascade= CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name="section_id")
+    @JsonBackReference
     private Section section;
 
 

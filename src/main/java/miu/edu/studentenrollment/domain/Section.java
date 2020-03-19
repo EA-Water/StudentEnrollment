@@ -1,20 +1,24 @@
 package miu.edu.studentenrollment.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import javax.validation.Valid;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(uniqueConstraints=@UniqueConstraint(columnNames={"faculty_id", "offering_id"}))
-public class Section {
+public class Section implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "section")
+    @OneToMany(mappedBy = "section", fetch = FetchType.EAGER)
+    @JsonManagedReference
     private List<Enrollment> enrollmentList;
 
     @Valid
