@@ -21,7 +21,7 @@ public class BlockController {
 
 	@GetMapping(value = "/")
 	public List<Block> getAllBlock() {
-		return blockService.getAllBlock();
+		return blockService.getAllBlocks();
 	}
 
 	@GetMapping(value = "/{Id}")
@@ -32,7 +32,7 @@ public class BlockController {
 	@PostMapping(value = "/")
 	public List<Block> createBlock(@RequestBody Block block) {
 		blockService.createBlock(block);
-		return blockService.getAllBlock();
+		return blockService.getAllBlocks();
 	}
 
 	@PutMapping("/{id}")

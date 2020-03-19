@@ -91,13 +91,13 @@ class BlockServiceImplTest {
     @Test
     void testBlockListSize() throws Exception {
     	when(blockRepo.findAll()).thenReturn(blockList);
-		assertEquals(2, blockService.getAllBlock().size());
+		assertEquals(2, blockService.getAllBlocks().size());
     }
 
     @Test
     void testViewAllBlocks() throws Exception {
         when(blockRepo.findAll()).thenReturn(blockList);
-        assertEquals(blockList, blockService.getAllBlock());
+        assertEquals(blockList, blockService.getAllBlocks());
     }
 
     @Test
