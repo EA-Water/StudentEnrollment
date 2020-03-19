@@ -15,8 +15,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.stubbing.Answer;
-import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -55,7 +53,6 @@ public class StudentServiceImplTest {
         student.setStudentId("Reza");
         student.setFirstName("Rezaur");
         student.setLastName("Rahman");
-        student.setIdSaving(1L);
         student.setStudentEmail("reza5630@gmail.com");
         student.setHomeAddress(address);
         student.setMailingAddress(address);

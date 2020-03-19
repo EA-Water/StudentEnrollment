@@ -9,9 +9,11 @@ import miu.edu.studentenrollment.repository.StudentRepo;
 import miu.edu.studentenrollment.service.AddressService;
 import miu.edu.studentenrollment.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
+
 
 @Service
 @Transactional
@@ -25,7 +27,9 @@ public class StudentServiceImpl implements StudentService {
     @Autowired
     private AddressRepo addressRepo;
 
+
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public Student createStudent(Student student) {
         if (addressRepo.findAll().size() != 0) {
             if (this.addressExists(student.getHomeAddress().getCountry(), student.getHomeAddress().getCity(), student.getHomeAddress().getStreet(), student.getHomeAddress().getPostalCode())) {
@@ -41,41 +45,49 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public void removeStudent(Long studentID) {
         studentRepo.deleteById(studentID);
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public Student getStudent(Long studentID) {
         return studentRepo.getOne(studentID);
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public List<Student> getAllStudents() {
         return studentRepo.findAll();
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public Long countStudents() {
         return studentRepo.count();
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN') or hasRole('STUDENT')")
     public Address getMailingAddress(Long studentID) {
         return studentRepo.findById(studentID).get().getMailingAddress();
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN') or hasRole('STUDENT')")
     public Address getHomeAddress(Long studentID) {
         return studentRepo.findById(studentID).get().getHomeAddress();
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN') or hasRole('STUDENT')")
     public Entry getEntry(Long studentID) {
         return studentRepo.findById(studentID).get().getEntry();
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN') or hasRole('STUDENT')")
     public List<Enrollment> getAllEnrollments(Long studentID) {
         return studentRepo.findById(studentID).get().getEnrollments();
     }
