@@ -4,6 +4,7 @@ import miu.edu.studentenrollment.domain.Entry;
 import miu.edu.studentenrollment.repository.EntryRepo;
 import miu.edu.studentenrollment.service.EntryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,7 +16,8 @@ public class EntryServiceImpl implements EntryService {
 
     @Autowired
     private EntryRepo entryRepo;
-
+    
+    @PreAuthorize("hasRole('ADMIN')")
     @Override
     public Entry createEntry(Entry entry) throws Exception {
         try {
@@ -34,7 +36,7 @@ public class EntryServiceImpl implements EntryService {
             throw new Exception(e.getMessage());
         }
     }
-
+    @PreAuthorize("hasRole('ADMIN') or hasRole('FACULTY')")
     @Override
     public Entry getEntry(Long id) throws Exception {
         try {
@@ -43,7 +45,8 @@ public class EntryServiceImpl implements EntryService {
             throw new Exception(e.getMessage());
         }
     }
-
+    
+    @PreAuthorize("hasRole('ADMIN')")
     @Override
     public Entry updateEntry(Entry entry, Long id) throws Exception {
         try {
@@ -60,7 +63,7 @@ public class EntryServiceImpl implements EntryService {
             throw  new Exception(ex.getMessage());
         }
     }
-
+    @PreAuthorize("hasRole('ADMIN') or hasRole('FACULTY')")
     @Override
     public List<Entry> getAllEntries() {
         return (List<Entry>) entryRepo.findAll();

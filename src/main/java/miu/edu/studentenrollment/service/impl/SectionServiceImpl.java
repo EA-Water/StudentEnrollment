@@ -4,6 +4,7 @@ import miu.edu.studentenrollment.domain.Section;
 import miu.edu.studentenrollment.repository.SectionRepo;
 import miu.edu.studentenrollment.service.SectionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,7 +16,8 @@ public class SectionServiceImpl implements SectionService {
 
     @Autowired
     private SectionRepo sectionRepo;
-
+    
+    @PreAuthorize("hasRole('ADMIN')")
     @Override
     public Section createSection(Section section) throws Exception {
 
@@ -25,13 +27,14 @@ public class SectionServiceImpl implements SectionService {
             throw new Exception(e.getMessage());
         }
     }
-
+    
+    @PreAuthorize("hasRole('ADMIN') or hasRole('FACULTY')")
     @Override
     public List<Section> getAllSections() {
         return sectionRepo.findAll();
     }
 
-
+    @PreAuthorize("hasRole('ADMIN')")
     @Override
     public Section updateSection(Section section,Long id) throws Exception {
 
@@ -41,7 +44,7 @@ public class SectionServiceImpl implements SectionService {
 
         return sectionRepo.save(updatingSection);
     }
-
+    @PreAuthorize("hasRole('ADMIN') or hasRole('FACULTY')")
     @Override
     public Section getSectionById(Long id) throws Exception {
         Section foundSection = sectionRepo.getOne(id);
