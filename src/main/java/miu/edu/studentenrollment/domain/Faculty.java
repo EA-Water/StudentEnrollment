@@ -3,6 +3,7 @@ package miu.edu.studentenrollment.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -19,7 +20,7 @@ public class Faculty {
 
     private String facultyTitle;
 
-    @OneToOne(mappedBy = "faculty", fetch = FetchType.EAGER)
+    @OneToOne(mappedBy = "faculty", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonIgnore
     private Section section;
 
