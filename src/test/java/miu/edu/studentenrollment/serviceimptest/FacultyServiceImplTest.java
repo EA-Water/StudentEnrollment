@@ -70,7 +70,7 @@ public class FacultyServiceImplTest {
 			facultyService.updateFaculity(faculty1);
 			verify(faculityRepo, times(1)).save(faculty1);
 		} catch (Exception e) {
-			 e.printStackTrace();
+			e.printStackTrace();
 		}
 	}
 
@@ -83,7 +83,7 @@ public class FacultyServiceImplTest {
 			e.printStackTrace();
 		}
 	}
-
+ 
 	@Test
 	void testGetFacultyById() {
 		try {
