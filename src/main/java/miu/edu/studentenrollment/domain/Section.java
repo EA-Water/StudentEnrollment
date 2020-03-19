@@ -1,8 +1,6 @@
 package miu.edu.studentenrollment.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import javax.validation.Valid;
@@ -17,8 +15,9 @@ public class Section implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "section", fetch = FetchType.EAGER)
-    @JsonManagedReference
+    @OneToMany(mappedBy = "section")
+//    @JsonManagedReference
+    @JsonIgnore
     private List<Enrollment> enrollmentList;
 
     @Valid

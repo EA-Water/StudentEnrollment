@@ -1,8 +1,5 @@
 package miu.edu.studentenrollment.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.engine.internal.Cascade;
 
 import javax.persistence.*;
 import javax.validation.Valid;
@@ -22,7 +19,6 @@ public class Enrollment {
     @Valid
     @ManyToOne(cascade= CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name="section_id")
-    @JsonBackReference
     private Section section;
 
 
