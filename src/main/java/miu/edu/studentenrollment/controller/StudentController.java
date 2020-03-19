@@ -1,5 +1,8 @@
 package miu.edu.studentenrollment.controller;
 
+import miu.edu.studentenrollment.domain.Address;
+import miu.edu.studentenrollment.domain.Enrollment;
+import miu.edu.studentenrollment.domain.Entry;
 import miu.edu.studentenrollment.domain.Student;
 import miu.edu.studentenrollment.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +51,26 @@ public class StudentController {
     @GetMapping("/")
     public List<Student> getAllStudents(){
         return studentService.getAllStudents();
+    }
+
+    @GetMapping("/{studentID}/mailingAddress")
+    public Address getMailingAddress(@PathVariable Long studentID){
+        return studentService.getMailingAddress(studentID);
+    }
+
+    @GetMapping("/{studentID}/homeAddress")
+    public Address getHomeAddress(@PathVariable Long studentID){
+        return studentService.getHomeAddress(studentID);
+    }
+
+    @GetMapping("/{studentID}/entry")
+    public Entry getEntry(@PathVariable Long studentID){
+        return studentService.getEntry(studentID);
+    }
+
+    @GetMapping("/{studentID}/enrollments")
+    public List<Enrollment> getAllEnrollments(@PathVariable Long studentID){
+        return studentService.getAllEnrollments(studentID);
     }
 
 }

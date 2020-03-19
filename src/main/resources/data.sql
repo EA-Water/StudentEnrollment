@@ -13,6 +13,7 @@ INSERT INTO `offering` (`id`, `offering_code`, `block_id`, `course_id`) VALUES (
 INSERT INTO `section` (`id`, `faculty_id`, `offering_id`) VALUES ('1', '1', '1');
 INSERT INTO `section` (`id`, `faculty_id`, `offering_id`) VALUES ('2', '2', '2');
 INSERT INTO `student` (`id`, `first_name`, `last_name`, `student_email`, `student_id`, `entry_id`, `home_address_id`, `mailing_address_id`) VALUES ('1', 'James', 'Gosling', 'jgosing@miu.edu', '610502', '1', '1', '1');
-INSERT INTO `student` (`id`, `first_name`, `last_name`, `student_email`, `student_id`, `entry_id`, `home_address_id`, `mailing_address_id`) VALUES ('2', 'Jack', 'Dorse', 'jdorse@miu.edu', '610503', '1', '1', '2');
+INSERT INTO `student` (`id`, `first_name`, `last_name`, `student_email`, `student_id`, `entry_id`, `home_address_id`, `mailing_address_id`) VALUES ('2', 'Jack', 'Dorse', 'jdorse@miu.edu', '610503', '2', '1', '2');
 INSERT INTO `enrollment` (`id`, `section_id`, `student_id`) VALUES ('1', '1', '1');
-INSERT INTO `enrollment` (`id`, `section_id`, `student_id`) VALUES ('2', '1', '2');
+INSERT INTO `enrollment` (`id`, `section_id`, `student_id`) VALUES ('2', '2', '1');
+INSERT INTO `enrollment` (`id`, `section_id`, `student_id`) VALUES ('3', '1', '2');

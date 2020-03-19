@@ -1,5 +1,8 @@
 package miu.edu.studentenrollment.service.impl;
 
+import miu.edu.studentenrollment.domain.Address;
+import miu.edu.studentenrollment.domain.Enrollment;
+import miu.edu.studentenrollment.domain.Entry;
 import miu.edu.studentenrollment.domain.Student;
 import miu.edu.studentenrollment.repository.AddressRepo;
 import miu.edu.studentenrollment.repository.StudentRepo;
@@ -22,6 +25,7 @@ public class StudentServiceImpl implements StudentService {
     @Autowired
     private AddressRepo addressRepo;
 
+    @Override
     public Student createStudent(Student student) {
         if (addressRepo.findAll().size() != 0) {
             if (this.addressExists(student.getHomeAddress().getCountry(), student.getHomeAddress().getCity(), student.getHomeAddress().getStreet(), student.getHomeAddress().getPostalCode())) {
@@ -36,20 +40,44 @@ public class StudentServiceImpl implements StudentService {
         return studentRepo.save(student);
     }
 
+    @Override
     public void removeStudent(Long studentID) {
         studentRepo.deleteById(studentID);
     }
 
+    @Override
     public Student getStudent(Long studentID) {
         return studentRepo.getOne(studentID);
     }
 
+    @Override
     public List<Student> getAllStudents() {
         return studentRepo.findAll();
     }
 
+    @Override
     public Long countStudents() {
         return studentRepo.count();
+    }
+
+    @Override
+    public Address getMailingAddress(Long studentID) {
+        return studentRepo.findById(studentID).get().getMailingAddress();
+    }
+
+    @Override
+    public Address getHomeAddress(Long studentID) {
+        return studentRepo.findById(studentID).get().getHomeAddress();
+    }
+
+    @Override
+    public Entry getEntry(Long studentID) {
+        return studentRepo.findById(studentID).get().getEntry();
+    }
+
+    @Override
+    public List<Enrollment> getAllEnrollments(Long studentID) {
+        return studentRepo.findById(studentID).get().getEnrollments();
     }
 
     public boolean addressExists(String country, String city, String street, Integer postalCode) {

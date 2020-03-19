@@ -1,19 +1,26 @@
 package miu.edu.studentenrollment.service;
 
-import miu.edu.studentenrollment.domain.Faculty;
-import miu.edu.studentenrollment.domain.Student;
+import miu.edu.studentenrollment.domain.*;
 
 import java.util.List;
 
 public interface StudentService {
 
-	public Student createStudent(Student student);
+	Student createStudent(Student student);
 
-	public void removeStudent(Long studentID);
+	void removeStudent(Long studentID);
 
-	public Student getStudent(Long studentID);
+	Student getStudent(Long studentID);
 
-	public List<Student> getAllStudents();
+	List<Student> getAllStudents();
 
-	public Long countStudents();
+	Long countStudents();
+
+    Address getMailingAddress(Long studentID);
+
+	Address getHomeAddress(Long studentID);
+
+	Entry getEntry(Long studentID);
+
+	List<Enrollment> getAllEnrollments(Long studentID);
 }

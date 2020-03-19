@@ -26,7 +26,7 @@ public class Student {
 
     @OneToMany(mappedBy = "student")
     @JsonIgnore
-    private List<Enrollment> enrollment;
+    private List<Enrollment> enrollments;
 
 //    @JsonIgnore
     @Valid
@@ -92,12 +92,12 @@ public class Student {
         this.studentEmail = studentEmail;
     }
 
-    public List<Enrollment> getEnrollment() {
-        return enrollment;
+    public List<Enrollment> getEnrollments() {
+        return enrollments;
     }
 
-    public void setEnrollment(List<Enrollment> enrollment) {
-        this.enrollment = enrollment;
+    public void setEnrollments(List<Enrollment> enrollment) {
+        this.enrollments = enrollment;
     }
 
     public Address getMailingAddress() {
