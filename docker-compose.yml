@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  db:
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=Dusenge93*
+      - MYSQL_DATABASE=enrollment
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=Dusenge93*
+#      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - 3307:3306
+
+  app:
+    image: jeandelapaixd/studentenrollment-image:latest
+    ports:
+      - 9595:9595
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/enrollment?autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true
+    depends_on:
+      - db
